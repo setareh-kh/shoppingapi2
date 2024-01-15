@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "5wFcx2zk5uAKYQdvmZedfVk0uHiCWKJezfcv6Dl72AVPl1w4vvH5JzR/Qg3vDS4i70yAzF1V8F5fvX9hK1YJwg==",
+  "dgSpecHash": "lXVUL31jKJPrlqAptu9hHyIrJU6bQ86xoFFoxtt+Yv9nwab3ZETYx6sFmq9gwF0fM8F60Cm57uju/hjAQDfJDw==",
   "success": true,
-  "projectFilePath": "e:\\Backend_class\\Githubrepositories\\shoppingapi2\\shoppingapi2.csproj",
+  "projectFilePath": "E:\\Backend_class\\Githubrepositories\\shoppingapi2\\shoppingapi2.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Star\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
     "C:\\Users\\Star\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.1\\automapper.extensions.microsoft.dependencyinjection.12.0.1.nupkg.sha512",

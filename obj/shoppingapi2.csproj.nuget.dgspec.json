@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "e:\\Backend_class\\Githubrepositories\\shoppingapi2\\shoppingapi2.csproj": {}
+    "E:\\Backend_class\\Githubrepositories\\shoppingapi2\\shoppingapi2.csproj": {}
   },
   "projects": {
-    "e:\\Backend_class\\Githubrepositories\\shoppingapi2\\shoppingapi2.csproj": {
+    "E:\\Backend_class\\Githubrepositories\\shoppingapi2\\shoppingapi2.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "e:\\Backend_class\\Githubrepositories\\shoppingapi2\\shoppingapi2.csproj",
+        "projectUniqueName": "E:\\Backend_class\\Githubrepositories\\shoppingapi2\\shoppingapi2.csproj",
         "projectName": "shoppingapi2",
-        "projectPath": "e:\\Backend_class\\Githubrepositories\\shoppingapi2\\shoppingapi2.csproj",
+        "projectPath": "E:\\Backend_class\\Githubrepositories\\shoppingapi2\\shoppingapi2.csproj",
         "packagesPath": "C:\\Users\\Star\\.nuget\\packages\\",
-        "outputPath": "e:\\Backend_class\\Githubrepositories\\shoppingapi2\\obj\\",
+        "outputPath": "E:\\Backend_class\\Githubrepositories\\shoppingapi2\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Star\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -20,6 +20,7 @@
           "net7.0"
         ],
         "sources": {
+          "C:\\Program Files\\dotnet\\sdk\\7.0.304\\Sdks\\Microsoft.NET.Sdk.Web\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
