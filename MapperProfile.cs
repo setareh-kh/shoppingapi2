@@ -14,6 +14,10 @@ namespace shoppingapi2
             CreateMap<AddProductDto,Product>();
             CreateMap<UpdateProductDto,Product>();
             CreateMap<CatogoryDto,Catogory>();
+            //mapping Entity models to responsDtos 
+            CreateMap<User,UserUserDto>();
+            CreateMap<User,UserAdminDto>();
+            
 
         }
     }

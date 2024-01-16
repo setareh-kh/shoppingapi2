@@ -11,7 +11,7 @@ namespace shoppingapi2.Repositories
         /// <returns>List<User></returns>
         Task<List<User>?> GetAllAsync();
         /// <summary>
-        /// use this function to Add a product to database
+        /// use this function to Add a user to database
         /// </summary>
         /// <param name="addUserDto"></param>
         /// <returns>User</returns>
