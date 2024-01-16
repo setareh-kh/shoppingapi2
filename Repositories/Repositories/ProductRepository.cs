@@ -5,7 +5,7 @@ using shoppingapi2.Models;
 
 namespace shoppingapi2.Repositories.Repositories
 {
-    public class ProductRepository
+    public class ProductRepository:IProductRepository
     {
         private readonly AppDbContext _context;
         private readonly IMapper _mapper;

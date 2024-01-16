@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using shoppingapi2.Models;
+using shoppingapi2.Repositories;
+using shoppingapi2.Repositories.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,7 +14,13 @@ builder.Services.AddSwaggerGen();
 //mysql connection Setting
 var myConnection=builder.Configuration.GetConnectionString("MyConnection");
 builder.Services.AddDbContext<AppDbContext>(options=>options.UseMySql(myConnection,ServerVersion.AutoDetect(myConnection)));
+//install Automapper services
 builder.Services.AddAutoMapper(typeof(Program));
+//install Irepositor and repository as services
+builder.Services.AddScoped<IUserRepository,UserRepository>();
+builder.Services.AddScoped<IProductRepository,ProductRepository>();
+builder.Services.AddScoped<ICatogoryRepository,CatogoryRepository>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
