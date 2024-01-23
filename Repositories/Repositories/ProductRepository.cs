@@ -16,7 +16,7 @@ namespace shoppingapi2.Repositories.Repositories
         }
         public async Task<List<Product>?> GetAllAsync()
         {
-            var products = await _context.Products.ToListAsync();
+            var products = await _context.Products.Include(p=>p.Catogory).ToListAsync();
             return products;
         }
         public async Task<Product> AddAsync(AddProductDto addProductDto)
