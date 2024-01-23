@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "lXVUL31jKJPrlqAptu9hHyIrJU6bQ86xoFFoxtt+Yv9nwab3ZETYx6sFmq9gwF0fM8F60Cm57uju/hjAQDfJDw==",
+  "dgSpecHash": "GXZM24dAIJXfrKclu7Wq9ijgizsmLkijKKrIlgu/RkTHEPXs5NI2LVACc86vJCmYGj+ET125PNB8mcxzrwFsbA==",
   "success": true,
   "projectFilePath": "E:\\Backend_class\\Githubrepositories\\shoppingapi2\\shoppingapi2.csproj",
   "expectedPackageFiles": [
@@ -66,7 +66,11 @@
     "C:\\Users\\Star\\.nuget\\packages\\system.threading.tasks\\4.3.0\\system.threading.tasks.4.3.0.nupkg.sha512",
     "C:\\Users\\Star\\.nuget\\packages\\system.threading.tasks.extensions\\4.5.4\\system.threading.tasks.extensions.4.5.4.nupkg.sha512",
     "C:\\Users\\Star\\.nuget\\packages\\system.windows.extensions\\4.7.0\\system.windows.extensions.4.7.0.nupkg.sha512",
-    "C:\\Users\\Star\\.nuget\\packages\\zstdsharp.port\\0.7.1\\zstdsharp.port.0.7.1.nupkg.sha512"
+    "C:\\Users\\Star\\.nuget\\packages\\zstdsharp.port\\0.7.1\\zstdsharp.port.0.7.1.nupkg.sha512",
+    "C:\\Users\\Star\\.nuget\\packages\\microsoft.netcore.app.ref\\7.0.15\\microsoft.netcore.app.ref.7.0.15.nupkg.sha512",
+    "C:\\Users\\Star\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\7.0.15\\microsoft.windowsdesktop.app.ref.7.0.15.nupkg.sha512",
+    "C:\\Users\\Star\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\7.0.15\\microsoft.aspnetcore.app.ref.7.0.15.nupkg.sha512",
+    "C:\\Users\\Star\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\7.0.15\\microsoft.netcore.app.host.win-x64.7.0.15.nupkg.sha512"
   ],
   "logs": []
 }

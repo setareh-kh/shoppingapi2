@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace shoppingapi2.Dtos.RequestDtos
 {
-    public class UserUserDto
+    public class UserUserResponseDto
     {
         [Required, MaxLength(250)]
         public required string Name { get; set; }

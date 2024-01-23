@@ -21,21 +21,21 @@ namespace shoppingapi2.Controllers
         public async Task<IActionResult> AddAsync([FromBody] AddUserDto addUserDto)
         {
             var user = await _userRepository.AddAsync(addUserDto);
-            return Ok(_mapper.Map<UserUserDto>(user));
+            return Ok(_mapper.Map<UserUserResponseDto>(user));
         }
         [HttpGet]
         [Route("GetAll")]
         public async Task<IActionResult> GetAllAsync()
         {
             var users = await _userRepository.GetAllAsync();
-            return Ok(users?.Count > 0 ? users.Select(x => _mapper.Map<UserUserDto>(x)) : "No Any exisit user");
+            return Ok(users?.Count > 0 ? users.Select(x => _mapper.Map<UserUserResponseDto>(x)) : "No Any exisit user");
         }
         [HttpGet]
         [Route("Get")]
         public async Task<IActionResult> GetByIdAsync(int id)
         {
             var user = await _userRepository.GetByIdAsync(id);
-            return Ok(user != null ? _mapper.Map<UserUserDto>(user) : $"{id}number is not found!!");
+            return Ok(user != null ? _mapper.Map<UserUserResponseDto>(user) : $"{id}number is not found!!");
 
         }
         [HttpPut]
