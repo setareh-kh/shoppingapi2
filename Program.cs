@@ -1,5 +1,4 @@
 using Microsoft.EntityFrameworkCore;
-using Newtonsoft.Json;
 using shoppingapi2.Models;
 using shoppingapi2.Repositories;
 using shoppingapi2.Repositories.Repositories;
@@ -8,9 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddControllers().AddNewtonsoftJson(s=> {
-    s.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
-});
+builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
