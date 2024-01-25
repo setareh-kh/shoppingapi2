@@ -18,5 +18,6 @@ namespace shoppingapi2.Dtos.RequestDtos
         public required bool Active { get; set; }
         [Required]
         public required int CatogoryId { get; set; }
+        public required IFormFile File { get; set; }
     }
 }

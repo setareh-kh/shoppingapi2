@@ -19,7 +19,7 @@ namespace shoppingapi2.Controllers
         }
         [HttpPost]
         [Route("Add")]
-        public async Task<IActionResult> AddAsync([FromBody] AddProductDto addProductDto)
+        public async Task<IActionResult> AddAsync([FromForm] AddProductDto addProductDto)
         {
             var product = await _productRepository.AddAsync(addProductDto);
             return Ok(_mapper.Map<UserProductResponseDto>(product));

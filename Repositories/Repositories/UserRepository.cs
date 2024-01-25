@@ -5,7 +5,7 @@ using shoppingapi2.Models;
 
 namespace shoppingapi2.Repositories.Repositories
 {
-    public class UserRepository:IUserRepository
+    public class UserRepository : IUserRepository
     {
         private readonly AppDbContext _context;
         private readonly IMapper _mapper;
@@ -25,6 +25,19 @@ namespace shoppingapi2.Repositories.Repositories
             user.CreateAt = DateTime.Now;
             await _context.Users.AddAsync(user);
             await _context.SaveChangesAsync();
+            var extension = Path.GetExtension(addUserDto.File.FileName);
+            var name = Path.GetRandomFileName();
+            var fileName = $"{name}.{extension}";
+            var storeDirectory = Path.Combine(Directory.GetCurrentDirectory(), "Assets", "Users", user.Id.ToString());
+            if (!Directory.Exists(storeDirectory))
+                Directory.CreateDirectory(storeDirectory);
+            var storeFile = Path.Combine(storeDirectory, fileName);
+            if (File.Exists(storeFile))
+                File.Delete(storeFile);
+            using (var fs = File.Create(storeFile))
+            {
+                await addUserDto.File.CopyToAsync(fs);
+            }
             return user;
         }
         public async Task<User?> GetByIdAsync(int id)
