@@ -1,17 +1,21 @@
 using System.ComponentModel.DataAnnotations;
+using shoppingapi2.Validators;
 
 namespace shoppingapi2.Dtos.RequestDtos
 {
     public class AddUserDto
     {
-        [Required, MaxLength(250)]
+        [Required(ErrorMessage = "please enter your Name"), MaxLength(250)]
         public required string Name { get; set; }
-        [Required, MaxLength(250)]
+        [Required(ErrorMessage = "please enter your MobileNumber"), MaxLength(250)]
+        [IsValidMobileNumber]
         public required string Mobile { get; set; }
-        [Required, MaxLength(250), MinLength(8)]
+        [Required(ErrorMessage = "please enter your password"), MaxLength(250), MinLength(8)]
         public required string Password { get; set; }
         public required byte Type { get; set; }// 0 is admin and 1 is user
+        [Required(ErrorMessage = "please upload file")]
+        [AllowedExtnsions(new[] { ".jpg", ".jpeg",".png", ".bmp", ".gif", ".tga", ".tiff", ".jfif" })]
         public required IFormFile File { get; set; }
-        
+
     }
 }

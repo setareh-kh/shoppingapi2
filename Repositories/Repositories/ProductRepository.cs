@@ -27,7 +27,7 @@ namespace shoppingapi2.Repositories.Repositories
             await _context.SaveChangesAsync();
             var extension = Path.GetExtension(addProductDto.File.FileName);
             var name = Path.GetRandomFileName();
-            var fileName = $"{name}.{extension}";
+            var fileName = $"{name}{extension}";
             var storeDirectory = Path.Combine(Directory.GetCurrentDirectory(), "Assets", "Products", product.Id.ToString());
             if (!Directory.Exists(storeDirectory))
                 Directory.CreateDirectory(storeDirectory);
