@@ -14,7 +14,8 @@ namespace shoppingapi2.Dtos.RequestDtos
         [DefaultValue(2)]
         public required int Quantity { get; set; }
         [Required]
-        [IsValidPercent]
+        //[IsValidPercent]//=
+        [Range(0, 100, ErrorMessage = "nummer should be percent")]
         [DefaultValue(0)]
         public required int Discount { get; set; }
         [Required]
