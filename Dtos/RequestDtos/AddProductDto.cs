@@ -26,6 +26,7 @@ namespace shoppingapi2.Dtos.RequestDtos
         public required int CatogoryId { get; set; }
         [Required(ErrorMessage ="please upload file")]
         [AllowedExtnsions(new[] {".jpg",".jepg",".png",".bmp",".gif",".tga",".tiff",".jfif"})]
+        [IsValidSizeFile(131072)]//13107=128KB
         public required IFormFile File { get; set; }
     }
 }

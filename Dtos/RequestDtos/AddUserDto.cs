@@ -16,6 +16,7 @@ namespace shoppingapi2.Dtos.RequestDtos
         public required byte Type { get; set; }// 0 is admin and 1 is user
         [Required(ErrorMessage = "please upload file")]
         [AllowedExtnsions(new[] { ".jpg", ".jpeg",".png", ".bmp", ".gif", ".tga", ".tiff", ".jfif" })]
+        [IsValidSizeFile(131072)]//13107=128KB
         public required IFormFile File { get; set; }
     }
 }
