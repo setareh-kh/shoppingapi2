@@ -35,6 +35,12 @@ namespace shoppingapi2.Repositories
         /// <param name="id"></param>
         /// <returns>bool</returns>
         Task<bool> DeleteAsync(int id);
+        /// <summary>
+        /// use this function to login
+        /// </summary>
+        /// <param name="loginUserDto"></param>
+        /// <returns>user</returns>
+        Task<User?> LoginAsync(LoginUserDto loginUserDto);
 
     }
 }

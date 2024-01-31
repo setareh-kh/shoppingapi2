@@ -67,6 +67,11 @@ namespace shoppingapi2.Repositories.Repositories
             }
             else return false;
         }
+        public async Task<User?> LoginAsync(LoginUserDto loginUserDto)
+        {
+            User? user = await _context.Users.Where(u=>u.Mobile==loginUserDto.Mobile && u.Password==loginUserDto.Password).FirstOrDefaultAsync();
+            return user;
+        }
 
 
     }

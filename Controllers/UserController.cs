@@ -1,6 +1,7 @@
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using shoppingapi2.Dtos.RequestDtos;
+using shoppingapi2.Models;
 using shoppingapi2.Repositories;
 
 namespace shoppingapi2.Controllers
@@ -11,31 +12,45 @@ namespace shoppingapi2.Controllers
     {
         private readonly IUserRepository _userRepository;
         private readonly IMapper _mapper;
+        private int currentUserType=0;
         public UserController(IUserRepository userRepository, IMapper mapper)
         {
             _userRepository = userRepository;
             _mapper = mapper;
         }
         [HttpPost]
+        [Route("Login")]
+        public async Task<IActionResult> LoginAsync([FromBody] LoginUserDto loginUserDto)
+        {
+            var user = await _userRepository.LoginAsync(loginUserDto);
+            if (user != null)
+            {
+                currentUserType = user.Type;
+                return Ok(GetResponseDto(user));
+            }
+            else return Ok("login faild");
+
+        }
+        [HttpPost]
         [Route("Add")]
         public async Task<IActionResult> AddAsync([FromForm] AddUserDto addUserDto)
         {
             var user = await _userRepository.AddAsync(addUserDto);
-            return Ok(_mapper.Map<UserUserResponseDto>(user));
+            return Ok(GetResponseDto(user));
         }
         [HttpGet]
         [Route("GetAll")]
         public async Task<IActionResult> GetAllAsync()
         {
             var users = await _userRepository.GetAllAsync();
-            return Ok(users?.Count > 0 ? users.Select(x => _mapper.Map<UserUserResponseDto>(x)) : "No Any exisit user");
+            return Ok(users?.Count > 0 ? users.Select(x => GetResponseDto(x)) : "No Any exisit user");
         }
         [HttpGet]
         [Route("Get")]
         public async Task<IActionResult> GetByIdAsync(int id)
         {
             var user = await _userRepository.GetByIdAsync(id);
-            return Ok(user != null ? _mapper.Map<UserUserResponseDto>(user) : $"{id}number is not found!!");
+            return Ok(user != null ? GetResponseDto(user) : $"{id}number is not found!!");
 
         }
         [HttpPut]
@@ -53,5 +68,13 @@ namespace shoppingapi2.Controllers
             return Ok(result == true ? $"{id} number is deleted" : $"{id}number is not found!!");
         }
 
+        private dynamic GetResponseDto(User user)
+        {
+            if (currentUserType == 1)
+                return _mapper.Map<UserUserResponseDto>(user);
+
+            return _mapper.Map<AdminUserResponseDto>(user);
+
+        }
     }
 }
