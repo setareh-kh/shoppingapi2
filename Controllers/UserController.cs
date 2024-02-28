@@ -1,6 +1,7 @@
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using shoppingapi2.Dtos.RequestDtos;
+using shoppingapi2.Dtos.ResponseDtos;
 using shoppingapi2.Models;
 using shoppingapi2.Repositories;
 
@@ -13,12 +14,12 @@ namespace shoppingapi2.Controllers
         private readonly IUserRepository _userRepository;
         private readonly IImageRepository _imageRepository;
         private readonly IMapper _mapper;
-        private int currentUserType=0;
-        public UserController(IUserRepository userRepository, IMapper mapper,IImageRepository imageRepository)
+        private int currentUserType = 0;
+        public UserController(IUserRepository userRepository, IMapper mapper, IImageRepository imageRepository)
         {
             _userRepository = userRepository;
             _mapper = mapper;
-            _imageRepository=imageRepository;
+            _imageRepository = imageRepository;
         }
         [HttpPost]
         [Route("Login")]
@@ -38,9 +39,9 @@ namespace shoppingapi2.Controllers
         public async Task<IActionResult> AddAsync([FromForm] AddUserDto addUserDto)
         {
             var user = await _userRepository.AddAsync(addUserDto);
-            var image=await _imageRepository.SaveAsync(addUserDto.File,"User",user.Id);
-            //return Ok(GetResponseDto(user));
-            return Ok(image.Url);
+            var Response=GetResponseDto(user);
+            Response.ImageProfile= await _imageRepository.SaveAsync(addUserDto.File, "User", user.Id);
+            return Ok(Response);
         }
         [HttpGet]
         [Route("GetAll")]
@@ -54,7 +55,13 @@ namespace shoppingapi2.Controllers
         public async Task<IActionResult> GetByIdAsync(int id)
         {
             var user = await _userRepository.GetByIdAsync(id);
-            return Ok(user != null ? GetResponseDto(user) : $"{id}number is not found!!");
+            if (user != null)
+            {
+                var Response= GetResponseDto(user);
+                Response.ImageProfile=await _imageRepository.GetAsync("user", user.Id);
+            }
+    
+            return Ok(user != null ? Response : $"{id}number is not found!!");
 
         }
         [HttpPut]

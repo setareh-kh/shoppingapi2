@@ -1,13 +1,14 @@
-using System.ComponentModel.DataAnnotations;
+using shoppingapi2.Models;
 
-namespace shoppingapi2.Dtos.RequestDtos
+namespace shoppingapi2.Dtos.ResponseDtos
 {
     public class UserUserResponseDto
     {
-        [Required, MaxLength(250)]
+       
         public required string Name { get; set; }
-        [Required, MaxLength(250)]
         public required string Mobile { get; set; }
+        public Image? ImageProfile { get; set; }
+        
         
 
     }

@@ -1,7 +1,7 @@
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using shoppingapi2.Dtos.RequestDtos;
-using shoppingapi2.Models;
+using shoppingapi2.Dtos.ResponseDtos;
 using shoppingapi2.Repositories;
 
 namespace shoppingapi2.Controllers

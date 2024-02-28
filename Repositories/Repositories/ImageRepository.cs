@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using shoppingapi2.Models;
 
 namespace shoppingapi2.Repositories.Repositories
@@ -29,36 +30,23 @@ namespace shoppingapi2.Repositories.Repositories
         public async Task<Image> SaveAsync(IFormFile file, string itemType, int itemId, int priority=0)
         {
             string nameStart = itemId.ToString();
-            string lastPath, url;
-            switch (itemType)
-            {
-                case "Product":
-                    lastPath = "Products";
-                    url = "/Assets/Products";
-                    break;
-                case "User":
-                    lastPath = "Users";
-                    url = "/Assets/Users";
-                    break;
-                default:
-                    lastPath = "Users";
-                    url = "/Assets/Users";
-                    break;
-
-            }
-            var name = await StoreToFileAsync(nameStart, lastPath, file);
+            var name = await StoreToFileAsync(nameStart, $"{itemType}s", file);
             var image = new Image
             {
                 Name = name,
                 ItemType = itemType,
                 ItemId = itemId,
-                Url = $"{url}/{name}",
+                Url = $"/Assets/{itemType}s/{name}",
                 Priority = priority
             };
             await _context.Images.AddAsync(image);
             await _context.SaveChangesAsync();
             return image;
         }
-        //public async Task<Image> GetAsync(string itemType,int itemId)
+        public async Task<Image?> GetAsync(string itemType,int itemId)
+        {
+            var image=await _context.Images.FirstOrDefaultAsync(image=>image.ItemType==itemType && image.ItemId==itemId);
+            return image;
+        }
     }
 }
