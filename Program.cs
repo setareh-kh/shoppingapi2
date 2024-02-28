@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.FileProviders;
 using shoppingapi2.Models;
 using shoppingapi2.Repositories;
 using shoppingapi2.Repositories.Repositories;
@@ -20,6 +21,7 @@ builder.Services.AddAutoMapper(typeof(Program));
 builder.Services.AddScoped<IUserRepository,UserRepository>();
 builder.Services.AddScoped<IProductRepository,ProductRepository>();
 builder.Services.AddScoped<ICatogoryRepository,CatogoryRepository>();
+builder.Services.AddScoped<IImageRepository,ImageRepository>();
 
 var app = builder.Build();
 
@@ -29,7 +31,9 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
+app.UseStaticFiles(new StaticFileOptions{
+    FileProvider=new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(),"Assets")),RequestPath="/Assets"
+});
 app.UseHttpsRedirection();
 
 app.UseAuthorization();

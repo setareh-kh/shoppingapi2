@@ -11,18 +11,22 @@ namespace shoppingapi2.Controllers
     public class ProductController : ControllerBase
     {
         private readonly IProductRepository _productRepository;
+        private readonly IImageRepository _imageRepository;
         private readonly IMapper _mapper;
-        public ProductController(IProductRepository productRepository, IMapper mapper)
+        public ProductController(IProductRepository productRepository, IMapper mapper,IImageRepository imageRepository)
         {
             _productRepository = productRepository;
             _mapper = mapper;
+            _imageRepository=imageRepository;
         }
         [HttpPost]
         [Route("Add")]
         public async Task<IActionResult> AddAsync([FromForm] AddProductDto addProductDto)
         {
             var product = await _productRepository.AddAsync(addProductDto);
-            return Ok(_mapper.Map<UserProductResponseDto>(product));
+            var image=await _imageRepository.SaveAsync(addProductDto.File,"Product",product.Id);
+            //return Ok(_mapper.Map<UserProductResponseDto>(product));
+            return Ok(image);
         }
         [HttpGet]
         [Route("GetAll")]

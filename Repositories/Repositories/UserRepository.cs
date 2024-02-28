@@ -25,6 +25,7 @@ namespace shoppingapi2.Repositories.Repositories
             user.CreateAt = DateTime.Now;
             await _context.Users.AddAsync(user);
             await _context.SaveChangesAsync();
+            /*
             var extension = Path.GetExtension(addUserDto.File.FileName);
             var name = Path.GetRandomFileName();
             var fileName = $"{name}{extension}";
@@ -37,7 +38,7 @@ namespace shoppingapi2.Repositories.Repositories
             using (var fs = File.Create(storeFile))
             {
                 await addUserDto.File.CopyToAsync(fs);
-            }
+            }*/
             return user;
         }
         public async Task<User?> GetByIdAsync(int id)

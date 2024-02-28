@@ -11,12 +11,14 @@ namespace shoppingapi2.Controllers
     public class UserController : ControllerBase
     {
         private readonly IUserRepository _userRepository;
+        private readonly IImageRepository _imageRepository;
         private readonly IMapper _mapper;
         private int currentUserType=0;
-        public UserController(IUserRepository userRepository, IMapper mapper)
+        public UserController(IUserRepository userRepository, IMapper mapper,IImageRepository imageRepository)
         {
             _userRepository = userRepository;
             _mapper = mapper;
+            _imageRepository=imageRepository;
         }
         [HttpPost]
         [Route("Login")]
@@ -36,7 +38,9 @@ namespace shoppingapi2.Controllers
         public async Task<IActionResult> AddAsync([FromForm] AddUserDto addUserDto)
         {
             var user = await _userRepository.AddAsync(addUserDto);
-            return Ok(GetResponseDto(user));
+            var image=await _imageRepository.SaveAsync(addUserDto.File,"User",user.Id);
+            //return Ok(GetResponseDto(user));
+            return Ok(image.Url);
         }
         [HttpGet]
         [Route("GetAll")]

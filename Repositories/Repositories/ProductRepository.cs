@@ -25,7 +25,7 @@ namespace shoppingapi2.Repositories.Repositories
             product.CreateAt = DateTime.Now;
             await _context.Products.AddAsync(product);
             await _context.SaveChangesAsync();
-            var extension = Path.GetExtension(addProductDto.File.FileName);
+            /*var extension = Path.GetExtension(addProductDto.File.FileName);
             var name = Path.GetRandomFileName();
             var fileName = $"{name}{extension}";
             var storeDirectory = Path.Combine(Directory.GetCurrentDirectory(), "Assets", "Products", product.Id.ToString());
@@ -37,7 +37,8 @@ namespace shoppingapi2.Repositories.Repositories
             using (var fs = File.Create(storeFile))
             {
                 await addProductDto.File.CopyToAsync(fs);
-            }
+            }*/
+            
             return product;
         }
         public async Task<Product?> GetByIdAsync(int id)
