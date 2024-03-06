@@ -3,7 +3,7 @@ using shoppingapi2.Models;
 
 namespace shoppingapi2.Repositories.Repositories
 {
-    public class ImageRepository:IImageRepository
+    public class ImageRepository : IImageRepository
     {
         private readonly AppDbContext _context;
         public ImageRepository(AppDbContext context)
@@ -27,7 +27,7 @@ namespace shoppingapi2.Repositories.Repositories
             }
             return fileName;
         }
-        public async Task<Image> SaveAsync(IFormFile file, string itemType, int itemId, int priority=0)
+        public async Task<Image> SaveAsync(IFormFile file, string itemType, int itemId, int priority = 0)
         {
             string nameStart = itemId.ToString();
             var name = await StoreToFileAsync(nameStart, $"{itemType}s", file);
@@ -43,10 +43,13 @@ namespace shoppingapi2.Repositories.Repositories
             await _context.SaveChangesAsync();
             return image;
         }
-        public async Task<Image?> GetAsync(string itemType,int itemId)
+        public async Task<Image?> GetAsync(string itemType, int itemId)
         {
-            var image=await _context.Images.FirstOrDefaultAsync(image=>image.ItemType==itemType && image.ItemId==itemId);
-            return image;
+            return await _context.Images.FirstOrDefaultAsync(image => image.ItemType == itemType && image.ItemId == itemId);
+        }
+        public async Task<List<Image>?> GetImagesAsync(string itemType, int itemId)
+        {
+            return await _context.Images.Where(x=>x.ItemType==itemType && x.ItemId==itemId).ToListAsync();
         }
     }
 }

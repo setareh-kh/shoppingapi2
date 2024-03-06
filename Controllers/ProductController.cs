@@ -2,6 +2,7 @@ using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using shoppingapi2.Dtos.RequestDtos;
 using shoppingapi2.Dtos.ResponseDtos;
+using shoppingapi2.Models;
 using shoppingapi2.Repositories;
 
 namespace shoppingapi2.Controllers
@@ -13,34 +14,55 @@ namespace shoppingapi2.Controllers
         private readonly IProductRepository _productRepository;
         private readonly IImageRepository _imageRepository;
         private readonly IMapper _mapper;
-        public ProductController(IProductRepository productRepository, IMapper mapper,IImageRepository imageRepository)
+        public ProductController(IProductRepository productRepository, IMapper mapper, IImageRepository imageRepository)
         {
             _productRepository = productRepository;
             _mapper = mapper;
-            _imageRepository=imageRepository;
+            _imageRepository = imageRepository;
         }
         [HttpPost]
         [Route("Add")]
         public async Task<IActionResult> AddAsync([FromForm] AddProductDto addProductDto)
         {
             var product = await _productRepository.AddAsync(addProductDto);
-            var image=await _imageRepository.SaveAsync(addProductDto.File,"Product",product.Id);
-            //return Ok(_mapper.Map<UserProductResponseDto>(product));
-            return Ok(image);
+            var response = _mapper.Map<AdminProductResponseDto>(product);
+            List<Image> imgLst=new();
+            foreach(var item in addProductDto.Files )
+            {
+               imgLst.Add(await _imageRepository.SaveAsync(item, "Product", product.Id));
+            }
+            response.Images = imgLst;
+            return Ok(response);
         }
         [HttpGet]
         [Route("GetAll")]
         public async Task<IActionResult> GetAllAsync()
         {
             var products = await _productRepository.GetAllAsync();
-            return Ok(products);//?.Count > 0 ? products.Select(x=>_mapper.Map<UserProductResponseDto>(x)) : "No Any exisit user");
+            if (products != null)
+            {
+                var response = products?.Select(x => _mapper.Map<AdminProductResponseDto>(x));
+                foreach (var p in response!)
+                {
+                    p.Images=await _imageRepository.GetImagesAsync("Product",p.Id);
+                }
+                return Ok(response);
+            }
+            else
+                return Ok("No Any exisit user");
         }
         [HttpGet]
         [Route("Get")]
         public async Task<IActionResult> GetByIdAsync(int id)
         {
             var product = await _productRepository.GetByIdAsync(id);
-            return Ok(product != null ? _mapper.Map<UserProductResponseDto>(product) : $"{id}number is not found!!");
+            if(product != null)
+            {
+                var response=_mapper.Map<AdminProductResponseDto>(product);
+                response.Images=await _imageRepository.GetImagesAsync("Product",product.Id);
+                return Ok(response);
+            }
+            return Ok($"product by {id} is not found!!");
 
         }
         [HttpPut]

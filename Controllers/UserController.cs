@@ -2,9 +2,7 @@ using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using shoppingapi2.Dtos.RequestDtos;
 using shoppingapi2.Dtos.ResponseDtos;
-using shoppingapi2.Models;
 using shoppingapi2.Repositories;
-
 namespace shoppingapi2.Controllers
 {
     [ApiController]
@@ -14,7 +12,6 @@ namespace shoppingapi2.Controllers
         private readonly IUserRepository _userRepository;
         private readonly IImageRepository _imageRepository;
         private readonly IMapper _mapper;
-        private int currentUserType = 0;
         public UserController(IUserRepository userRepository, IMapper mapper, IImageRepository imageRepository)
         {
             _userRepository = userRepository;
@@ -26,21 +23,15 @@ namespace shoppingapi2.Controllers
         public async Task<IActionResult> LoginAsync([FromBody] LoginUserDto loginUserDto)
         {
             var user = await _userRepository.LoginAsync(loginUserDto);
-            if (user != null)
-            {
-                currentUserType = user.Type;
-                return Ok(GetResponseDto(user));
-            }
-            else return Ok("login faild");
-
+            return Ok(user != null ? _mapper.Map<AdminUserResponseDto>(user) : "login faild");
         }
         [HttpPost]
         [Route("Add")]
         public async Task<IActionResult> AddAsync([FromForm] AddUserDto addUserDto)
         {
             var user = await _userRepository.AddAsync(addUserDto);
-            var Response=GetResponseDto(user);
-            Response.ImageProfile= await _imageRepository.SaveAsync(addUserDto.File, "User", user.Id);
+            var Response = _mapper.Map<AdminUserResponseDto>(user);
+            Response.ImageProfile = await _imageRepository.SaveAsync(addUserDto.File, "User", user.Id);
             return Ok(Response);
         }
         [HttpGet]
@@ -48,7 +39,17 @@ namespace shoppingapi2.Controllers
         public async Task<IActionResult> GetAllAsync()
         {
             var users = await _userRepository.GetAllAsync();
-            return Ok(users?.Count > 0 ? users.Select(x => GetResponseDto(x)) : "No Any exisit user");
+            if (users != null)
+            {
+                var response=users.Select(x => _mapper.Map<AdminUserResponseDto>(x));
+                foreach (var user in response)
+                {
+                    user.ImageProfile=await _imageRepository.GetAsync("User",user.Id);
+                }
+                return Ok(response);
+            }
+            else
+                return Ok(users?.Count > 0 ? users.Select(x => _mapper.Map<AdminUserResponseDto>(x)) : "No Any exisit user");
         }
         [HttpGet]
         [Route("Get")]
@@ -57,11 +58,12 @@ namespace shoppingapi2.Controllers
             var user = await _userRepository.GetByIdAsync(id);
             if (user != null)
             {
-                var Response= GetResponseDto(user);
-                Response.ImageProfile=await _imageRepository.GetAsync("user", user.Id);
+                var Response = _mapper.Map<UserUserResponseDto>(user);
+                Response.ImageProfile = await _imageRepository.GetAsync("User", user.Id);
+                return Ok(Response);
             }
-    
-            return Ok(user != null ? Response : $"{id}number is not found!!");
+            else
+                return Ok($"user by {id} number is not found!!");
 
         }
         [HttpPut]
@@ -79,13 +81,5 @@ namespace shoppingapi2.Controllers
             return Ok(result == true ? $"{id} number is deleted" : $"{id}number is not found!!");
         }
 
-        private dynamic GetResponseDto(User user)
-        {
-            if (currentUserType == 1)
-                return _mapper.Map<UserUserResponseDto>(user);
-
-            return _mapper.Map<AdminUserResponseDto>(user);
-
-        }
     }
 }
