@@ -23,7 +23,14 @@ namespace shoppingapi2.Controllers
         public async Task<IActionResult> LoginAsync([FromBody] LoginUserDto loginUserDto)
         {
             var user = await _userRepository.LoginAsync(loginUserDto);
-            return Ok(user != null ? _mapper.Map<AdminUserResponseDto>(user) : "login faild");
+            if (user != null)
+            {
+                var Response = _mapper.Map<AdminUserResponseDto>(user);
+                Response.ImageProfile = await _imageRepository.GetAsync("User", user.Id);
+                return Ok(Response);
+            }
+
+            return Ok("login faild");
         }
         [HttpPost]
         [Route("Add")]
@@ -41,12 +48,12 @@ namespace shoppingapi2.Controllers
             var users = await _userRepository.GetAllAsync();
             if (users != null)
             {
-                var response=users.Select(x => _mapper.Map<AdminUserResponseDto>(x));
-                foreach (var user in response)
+                var responses = users.Select(x => _mapper.Map<AdminUserResponseDto>(x)).ToList();
+                foreach (var user in responses)
                 {
-                    user.ImageProfile=await _imageRepository.GetAsync("User",user.Id);
+                    user.ImageProfile = await _imageRepository.GetAsync("User", user.Id);
                 }
-                return Ok(response);
+                return Ok(responses);
             }
             else
                 return Ok(users?.Count > 0 ? users.Select(x => _mapper.Map<AdminUserResponseDto>(x)) : "No Any exisit user");

@@ -41,12 +41,12 @@ namespace shoppingapi2.Controllers
             var products = await _productRepository.GetAllAsync();
             if (products != null)
             {
-                var response = products?.Select(x => _mapper.Map<AdminProductResponseDto>(x));
-                foreach (var p in response!)
+                var responses = products?.Select(x => _mapper.Map<AdminProductResponseDto>(x)).ToList();
+                foreach (var r in responses!)
                 {
-                    p.Images=await _imageRepository.GetImagesAsync("Product",p.Id);
+                    r.Images=await _imageRepository.GetImagesAsync("Product",r.Id);
                 }
-                return Ok(response);
+                return Ok(responses);
             }
             else
                 return Ok("No Any exisit user");

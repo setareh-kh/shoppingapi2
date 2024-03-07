@@ -27,14 +27,14 @@ namespace shoppingapi2.Controllers
         public async Task<IActionResult> GetAllAsync()
         {
             var catogories = await _catogoryRepository.GetAllAsync();
-            return Ok(catogories);
+            return Ok(catogories!=null ? catogories:"No Any exisit catogory");
         }
         [HttpGet]
         [Route("Get")]
         public async Task<IActionResult> GetByIdAsync(int id)
         {
             var catogory = await _catogoryRepository.GetByIdAsync(id);
-            return Ok(catogory);
+            return Ok(catogory!= null ? catogory:$"catogory {id} not found");
 
         }
         [HttpPut]
