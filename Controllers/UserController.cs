@@ -84,8 +84,23 @@ namespace shoppingapi2.Controllers
         [Route("Delete/{id}")]
         public async Task<IActionResult> DeleteAsync(int id)
         {
-            var result = await _userRepository.DeleteAsync(id);
-            return Ok(result == true ? $"{id} number is deleted" : $"{id}number is not found!!");
+            var resultUser = await _userRepository.DeleteAsync(id);
+            var rsltImg=await _imageRepository.DeleteAsync("User",id);
+            if (rsltImg==true) {
+                if(resultUser==true)
+                    return Ok("Successfully both of deleted");
+                else 
+                return Ok("Falied product, succssfully images");
+
+            } 
+            else
+            {
+                if(resultUser==true)
+                    return Ok("Falied images , succssfully product");
+                else 
+                return Ok("Falied both of them");
+
+            }
         }
 
     }

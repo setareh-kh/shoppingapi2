@@ -15,10 +15,10 @@ namespace shoppingapi2.Repositories.Repositories
             var ext = Path.GetExtension(file.FileName);
             var randomName = Path.GetRandomFileName();
             var fileName = $"{uniqStart}_{randomName}{ext}";
-            var storeDirectore = Path.Combine(Directory.GetCurrentDirectory(), "Assets", lastPath);
-            if (!Directory.Exists(storeDirectore))
-                Directory.CreateDirectory(storeDirectore);
-            var storeFile = Path.Combine(storeDirectore, fileName);
+            var storeDirectory = Path.Combine(Directory.GetCurrentDirectory(), "Assets", lastPath);
+            if (!Directory.Exists(storeDirectory))
+                Directory.CreateDirectory(storeDirectory);
+            var storeFile = Path.Combine(storeDirectory, fileName);
             if (File.Exists(storeFile))
                 File.Delete(storeFile);
             using (var fs = File.Create(storeFile))
@@ -49,7 +49,23 @@ namespace shoppingapi2.Repositories.Repositories
         }
         public async Task<List<Image>?> GetImagesAsync(string itemType, int itemId)
         {
-            return await _context.Images.Where(x=>x.ItemType==itemType && x.ItemId==itemId).ToListAsync();
+            return await _context.Images.Where(x => x.ItemType == itemType && x.ItemId == itemId).ToListAsync();
+        }
+        public async Task<bool> DeleteAsync(string itemType, int itemid)
+        {
+            var imgs = await _context.Images.Where(x => x.ItemType == itemType && x.ItemId == itemid).ToListAsync();
+            if (imgs == null) return false;
+            foreach (var image in imgs)
+            {
+                var dltFile = $"{Directory.GetCurrentDirectory()}\\Assets\\{itemType}s\\{image.Name}";
+                //Console.WriteLine(Directory.GetCurrentDirectory());
+                //Console.WriteLine(image.Url);
+                //Console.WriteLine(dltFile);
+                System.IO.File.Delete(dltFile);
+                _context.Images.Remove(image);
+            }
+            await _context.SaveChangesAsync();
+            return true;
         }
     }
 }
