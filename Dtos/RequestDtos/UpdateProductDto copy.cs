@@ -16,6 +16,7 @@ namespace shoppingapi2.Dtos.RequestDtos
         public required bool Available { get; set; }
         [Required]
         public required bool Active { get; set; }
+        public required List<IFormFile> Files { get; set; }
 
     }
 }

@@ -8,6 +8,7 @@ namespace shoppingapi2.Repositories
         Task<Image?> GetAsync(string itemType,int itemId);
         Task<List<Image>?> GetImagesAsync(string itemType, int itemId);
         Task<bool> DeleteAsync(string itemType, int itemid);
+         Task<bool> UpdateAsync(IFormFile file, string itemType, int itemId, int priority = 0, bool isAdded=true);
         
     }
 }

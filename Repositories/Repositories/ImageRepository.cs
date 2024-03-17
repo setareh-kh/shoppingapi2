@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using MySqlX.XDevAPI.Common;
 using shoppingapi2.Models;
 
 namespace shoppingapi2.Repositories.Repositories
@@ -66,6 +67,25 @@ namespace shoppingapi2.Repositories.Repositories
             }
             await _context.SaveChangesAsync();
             return true;
+        }
+        public async Task<bool> UpdateAsync(IFormFile file, string itemType, int itemId, int priority = 0, bool isAdded=true)
+        {
+            if (isAdded)
+            {
+                await SaveAsync(file, itemType, itemId, priority = 1);
+                return true;
+            }
+            else
+            {
+                var result = await DeleteAsync(itemType, itemId);
+                if (result == true)
+                {
+                    await SaveAsync(file, itemType, itemId);
+                    return true;
+                }
+                else return false;      
+            }
+
         }
     }
 }

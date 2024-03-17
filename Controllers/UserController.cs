@@ -75,32 +75,31 @@ namespace shoppingapi2.Controllers
         }
         [HttpPut]
         [Route("Update/{id}")]
-        public async Task<IActionResult> UpdateAsync(int id, UpdateUserDto updateUserDto)
+        public async Task<IActionResult> UpdateAsync(int id, [FromForm] UpdateUserDto updateUserDto)
         {
-            var result = await _userRepository.UpdateAsync(id, updateUserDto);
-            return Ok(result == true ? $"{id} number is updated" : $"{id}number is not found!!");
+            var userResult = await _userRepository.UpdateAsync(id, updateUserDto);
+            if (!userResult)
+                return Ok($"{id}number is not found!!");
+            var imgResult = await _imageRepository.UpdateAsync(updateUserDto.File, "User", id, isAdded: false);
+            if (imgResult)
+                return Ok($"successfully updated the user and his Image Profile");
+            else
+                return Ok("Error when updating image profile");
         }
         [HttpDelete]
         [Route("Delete/{id}")]
         public async Task<IActionResult> DeleteAsync(int id)
         {
-            var resultUser = await _userRepository.DeleteAsync(id);
-            var rsltImg=await _imageRepository.DeleteAsync("User",id);
-            if (rsltImg==true) {
-                if(resultUser==true)
-                    return Ok("Successfully both of deleted");
-                else 
-                return Ok("Falied product, succssfully images");
+            var userResult = await _userRepository.DeleteAsync(id);
+            if (!userResult)
+                return Ok($"{id} number is not found!");
 
-            } 
+            var imgResult = await _imageRepository.DeleteAsync("User", id);
+            if (imgResult)
+                return Ok("Successfuly deleted the user and his Image Profile");
             else
-            {
-                if(resultUser==true)
-                    return Ok("Falied images , succssfully product");
-                else 
-                return Ok("Falied both of them");
+                return Ok("Failed to delete Image Profile");
 
-            }
         }
 
     }
