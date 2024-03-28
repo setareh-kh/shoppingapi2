@@ -27,6 +27,7 @@ builder.Services.AddScoped<IUserRepository,UserRepository>();
 builder.Services.AddScoped<IProductRepository,ProductRepository>();
 builder.Services.AddScoped<ICatogoryRepository,CatogoryRepository>();
 builder.Services.AddScoped<IImageRepository,ImageRepository>();
+builder.Services.AddScoped<IOrderRepository,OrderRepository>();
 
 var app = builder.Build();
 
