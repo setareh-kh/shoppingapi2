@@ -13,5 +13,6 @@ namespace shoppingapi2.Models
         public DbSet<Catogory> Catogories {get; set;}
         public DbSet<Image> Images {get; set;}
         public DbSet<Order> Orders {get; set;}
+        public DbSet<OrderDetails> OrderDetails {get; set;}
     }    
 }

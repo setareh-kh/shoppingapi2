@@ -17,6 +17,8 @@ namespace shoppingapi2
             CreateMap<CatogoryDto,Catogory>();
             CreateMap<AddOrderDto,Order>();
             CreateMap<UpdateOrderDto,Order>();
+            CreateMap<AddOrderDetailsDto,OrderDetails>();
+            CreateMap<UpdateOrderDetailsDto,OrderDetails>();
             //mapping Entity models to responsDtos 
             CreateMap<User,UserUserResponseDto>();
             CreateMap<User,AdminUserResponseDto>();

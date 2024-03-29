@@ -12,7 +12,6 @@ namespace shoppingapi2.Models
         [Required]
         public required DateTime CreateAt { get; set; }
         public  DateTime? UpdateDate { get; set; }
-        
         //Fk 
         [Required]
         public required int UserId { get; set; }

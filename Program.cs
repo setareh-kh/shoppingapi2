@@ -28,6 +28,8 @@ builder.Services.AddScoped<IProductRepository,ProductRepository>();
 builder.Services.AddScoped<ICatogoryRepository,CatogoryRepository>();
 builder.Services.AddScoped<IImageRepository,ImageRepository>();
 builder.Services.AddScoped<IOrderRepository,OrderRepository>();
+builder.Services.AddScoped<IOrderDetailsRepository,OrderDetailsRepository>();
+
 
 var app = builder.Build();
 

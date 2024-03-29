@@ -30,14 +30,14 @@ namespace shoppingapi2.Controllers
                 //var responses = orders?.Select(x => _mapper.Map<AdminProductResponseDto>(x)).ToList();
                 return Ok(orders);
             else
-                return Ok("No Any exisit user");
+                return Ok("No Any exisit Order");
         }
         [HttpGet]
         [Route("Get")]
         public async Task<IActionResult> GetByIdAsync(int id)
         {
             var order = await _orderRepository.GetByIdAsync(id);
-            return order == null ? Ok($"product by {id} is not found!!") : Ok(order);
+            return order == null ? Ok($"no any Orderd by {id} is not found!!") : Ok(order);
 
         }
         [HttpPut]

@@ -49,7 +49,7 @@ namespace shoppingapi2.Controllers
                 return Ok(responses);
             }
             else
-                return Ok("No Any exisit user");
+                return Ok("No Any exisit Product");
         }
         [HttpGet]
         [Route("Get")]
