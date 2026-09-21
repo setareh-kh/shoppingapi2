@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "E:\\Backend_class\\Githubrepositories\\shoppingapi2\\shoppingapi2.csproj": {}
+    "D:\\.net project\\shoppingapi2-develop2\\shoppingapi2.csproj": {}
   },
   "projects": {
-    "E:\\Backend_class\\Githubrepositories\\shoppingapi2\\shoppingapi2.csproj": {
+    "D:\\.net project\\shoppingapi2-develop2\\shoppingapi2.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\Backend_class\\Githubrepositories\\shoppingapi2\\shoppingapi2.csproj",
+        "projectUniqueName": "D:\\.net project\\shoppingapi2-develop2\\shoppingapi2.csproj",
         "projectName": "shoppingapi2",
-        "projectPath": "E:\\Backend_class\\Githubrepositories\\shoppingapi2\\shoppingapi2.csproj",
-        "packagesPath": "C:\\Users\\Star\\.nuget\\packages\\",
-        "outputPath": "E:\\Backend_class\\Githubrepositories\\shoppingapi2\\obj\\",
+        "projectPath": "D:\\.net project\\shoppingapi2-develop2\\shoppingapi2.csproj",
+        "packagesPath": "C:\\Users\\1\\.nuget\\packages\\",
+        "outputPath": "D:\\.net project\\shoppingapi2-develop2\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Star\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\1\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net7.0"
@@ -32,7 +32,13 @@
           "warnAsError": [
             "NU1605"
           ]
-        }
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        },
+        "SdkAnalysisLevel": "10.0.100"
       },
       "frameworks": {
         "net7.0": {
@@ -88,24 +94,6 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "downloadDependencies": [
-            {
-              "name": "Microsoft.AspNetCore.App.Ref",
-              "version": "[7.0.15, 7.0.15]"
-            },
-            {
-              "name": "Microsoft.NETCore.App.Host.win-x64",
-              "version": "[7.0.15, 7.0.15]"
-            },
-            {
-              "name": "Microsoft.NETCore.App.Ref",
-              "version": "[7.0.15, 7.0.15]"
-            },
-            {
-              "name": "Microsoft.WindowsDesktop.App.Ref",
-              "version": "[7.0.15, 7.0.15]"
-            }
-          ],
           "frameworkReferences": {
             "Microsoft.AspNetCore.App": {
               "privateAssets": "none"
@@ -114,7 +102,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.101\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.102\\RuntimeIdentifierGraph.json"
         }
       }
     }

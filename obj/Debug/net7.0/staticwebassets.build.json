@@ -1,11 +1,1 @@
-{
-  "Version": 1,
-  "Hash": "B0v+ZkEHAoNHMiCRpavZXI2qkKY8PE8ubvTRk14pYVo=",
-  "Source": "shoppingapi2",
-  "BasePath": "_content/shoppingapi2",
-  "Mode": "Default",
-  "ManifestType": "Build",
-  "ReferencedProjectsConfiguration": [],
-  "DiscoveryPatterns": [],
-  "Assets": []
-}
+{"Version":1,"Hash":"yKikdDerINju2kUaFM36S3RrTAncNs9ysr5DnyDOd2E=","Source":"shoppingapi2","BasePath":"/","Mode":"Root","ManifestType":"Build","ReferencedProjectsConfiguration":[],"DiscoveryPatterns":[],"Assets":[],"Endpoints":[]}
