@@ -32,7 +32,7 @@ namespace shoppingapi2.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Catogories");
+                    b.ToTable("Catogories", (string)null);
                 });
 
             modelBuilder.Entity("shoppingapi2.Models.Image", b =>
@@ -64,7 +64,7 @@ namespace shoppingapi2.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Images");
+                    b.ToTable("Images", (string)null);
                 });
 
             modelBuilder.Entity("shoppingapi2.Models.Order", b =>
@@ -94,7 +94,7 @@ namespace shoppingapi2.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Orders");
+                    b.ToTable("Orders", (string)null);
                 });
 
             modelBuilder.Entity("shoppingapi2.Models.OrderDetails", b =>
@@ -130,7 +130,7 @@ namespace shoppingapi2.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("OrderDetails");
+                    b.ToTable("OrderDetails", (string)null);
                 });
 
             modelBuilder.Entity("shoppingapi2.Models.Product", b =>
@@ -172,7 +172,7 @@ namespace shoppingapi2.Migrations
 
                     b.HasIndex("CatogoryId");
 
-                    b.ToTable("Products");
+                    b.ToTable("Products", (string)null);
                 });
 
             modelBuilder.Entity("shoppingapi2.Models.User", b =>
@@ -204,7 +204,7 @@ namespace shoppingapi2.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Users");
+                    b.ToTable("Users", (string)null);
                 });
 
             modelBuilder.Entity("shoppingapi2.Models.Order", b =>

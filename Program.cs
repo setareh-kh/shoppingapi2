@@ -4,6 +4,7 @@ using shoppingapi2.Models;
 using shoppingapi2.Repositories;
 using shoppingapi2.Repositories.Repositories;
 using Newtonsoft.Json;
+using Org.BouncyCastle.Asn1.X509.Qualified;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -29,6 +30,8 @@ builder.Services.AddScoped<ICatogoryRepository,CatogoryRepository>();
 builder.Services.AddScoped<IImageRepository,ImageRepository>();
 builder.Services.AddScoped<IOrderRepository,OrderRepository>();
 builder.Services.AddScoped<IOrderDetailsRepository,OrderDetailsRepository>();
+builder.Services.AddScoped(typeof(IBaseRepository<>),typeof(BaseRepository<>));
+
 
 
 var app = builder.Build();

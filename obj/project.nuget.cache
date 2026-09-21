@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "act8Jr62fDM=",
+  "dgSpecHash": "aX1m4WfKknc=",
   "success": true,
-  "projectFilePath": "D:\\.net project\\shoppingapi2-develop2\\shoppingapi2.csproj",
+  "projectFilePath": "D:\\.net project\\shoppingapi2dev3\\shoppingapi2.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\1\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
     "C:\\Users\\1\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.1\\automapper.extensions.microsoft.dependencyinjection.12.0.1.nupkg.sha512",

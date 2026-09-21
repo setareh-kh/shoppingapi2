@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace shoppingapi2.Models
 {
-    public class Order
+    public class Order : ISqlEntity
     {
         public int Id { get; set; }
         [Required, MaxLength(250)]
@@ -11,11 +11,11 @@ namespace shoppingapi2.Models
         public required decimal TotalPrice { get; set; }
         [Required]
         public required DateTime CreateAt { get; set; }
-        public  DateTime? UpdateDate { get; set; }
+        public DateTime? UpdateDate { get; set; }
         //Fk 
         [Required]
         public required int UserId { get; set; }
-        public User? User{ get; set; }
+        public User? User { get; set; }
 
     }
 }

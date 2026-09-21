@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace shoppingapi2.Models
 {
-    public class Image
+    public class Image : ISqlEntity
     {
         public int Id { get; set; }
         [Required]
@@ -18,6 +18,7 @@ namespace shoppingapi2.Models
         public required string Url { get; set; }
         [Required]
         public int Priority { get; set; }
+        //public DateTime? CreateAt { get; set; }
 
     }
 }

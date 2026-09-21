@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\.net project\\shoppingapi2-develop2\\shoppingapi2.csproj": {}
+    "D:\\.net project\\shoppingapi2dev3\\shoppingapi2.csproj": {}
   },
   "projects": {
-    "D:\\.net project\\shoppingapi2-develop2\\shoppingapi2.csproj": {
+    "D:\\.net project\\shoppingapi2dev3\\shoppingapi2.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\.net project\\shoppingapi2-develop2\\shoppingapi2.csproj",
+        "projectUniqueName": "D:\\.net project\\shoppingapi2dev3\\shoppingapi2.csproj",
         "projectName": "shoppingapi2",
-        "projectPath": "D:\\.net project\\shoppingapi2-develop2\\shoppingapi2.csproj",
+        "projectPath": "D:\\.net project\\shoppingapi2dev3\\shoppingapi2.csproj",
         "packagesPath": "C:\\Users\\1\\.nuget\\packages\\",
-        "outputPath": "D:\\.net project\\shoppingapi2-develop2\\obj\\",
+        "outputPath": "D:\\.net project\\shoppingapi2dev3\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\1\\AppData\\Roaming\\NuGet\\NuGet.Config"

@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace shoppingapi2.Models
 {
-    public class OrderDetails
+    public class OrderDetails:ISqlEntity
     {
         public int Id { get; set; }
                 

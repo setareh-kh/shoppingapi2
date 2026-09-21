@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace shoppingapi2.Models
 {
-    public class User
+    public class User:ISqlEntity
     {
         public int Id { get; set; }
         [Required, MaxLength(250)]
