@@ -3,7 +3,8 @@ using Microsoft.EntityFrameworkCore;
 using shoppingapi2.Models;
 
 namespace shoppingapi2.Repositories.Repositories;
-public class BaseRepository<T> where T: class,ISqlEntity
+
+public class BaseRepository<T> where T : class, ISqlEntity
 {
     protected readonly AppDbContext AppDbContext;
     protected BaseRepository(AppDbContext appDbContext)
@@ -14,8 +15,9 @@ public class BaseRepository<T> where T: class,ISqlEntity
     public async Task InsertAsync(T entity)
     {
         await AppDbContext.Set<T>().AddAsync(entity);
+        await AppDbContext.SaveChangesAsync();
     }
-     //Read
+    //Read
     public async Task<List<T>> GetAllAsync()
     {
         return await AppDbContext.Set<T>().ToListAsync();
@@ -36,17 +38,17 @@ public class BaseRepository<T> where T: class,ISqlEntity
         return await AppDbContext.Set<T>().Where(predicate).ToListAsync();
     }
     //Update 
-    public async Task<bool> UpdateAsync(T entity,T newValue)
+    public async Task<bool> UpdateAsync(T entity, T newValue)
     {
-       AppDbContext.Entry(entity).CurrentValues.SetValues(newValue);
-       await AppDbContext.SaveChangesAsync();
-       return true;
-    
+        AppDbContext.Entry(entity).CurrentValues.SetValues(newValue);
+        await AppDbContext.SaveChangesAsync();
+        return true;
+
     }
-    public async Task<bool> UpdateByIdAsync(int id,T newValue)
+    public async Task<bool> UpdateByIdAsync(int id, T newValue)
     {
         var entity = await GetByIdAsync(id);
-        if (entity != null) 
+        if (entity != null)
         {
             await UpdateAsync(entity, newValue);
             return true;
@@ -64,7 +66,7 @@ public class BaseRepository<T> where T: class,ISqlEntity
     public async Task<bool> DeleteByIdAsync(int id)
     {
         var entity = await GetByIdAsync(id);
-        if (entity != null) 
+        if (entity != null)
         {
             await DeleteAsync(entity);
             return true;
@@ -80,5 +82,5 @@ public class BaseRepository<T> where T: class,ISqlEntity
     }
     //other common operations
     public async Task<bool> SaveChangesAsync() => await AppDbContext.SaveChangesAsync() > 0;
-    
+
 }
