@@ -5,7 +5,7 @@ using shoppingapi2.Dtos.ResponseDtos;
 using shoppingapi2.Repositories;
 namespace shoppingapi2.Controllers
 {
-    [ApiController]
+    /*[ApiController]
     [Route("api/[controller]")]
     public class UserController : ControllerBase
     {
@@ -102,5 +102,5 @@ namespace shoppingapi2.Controllers
 
         }
 
-    }
+    }*/
 }

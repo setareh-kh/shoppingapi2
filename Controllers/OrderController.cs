@@ -5,7 +5,7 @@ using shoppingapi2.Repositories;
 
 namespace shoppingapi2.Controllers
 {
-    [ApiController]
+   /* [ApiController]
     [Route("api/[controller]")]
     public class OrderController : ControllerBase
     {
@@ -59,5 +59,5 @@ namespace shoppingapi2.Controllers
             return Ok($"{id} number is removed now");
 
         }
-    }
+    }*/
 }

@@ -1,11 +1,7 @@
-using AutoMapper;
-using Microsoft.AspNetCore.Mvc;
-using shoppingapi2.Dtos.RequestDtos;
-using shoppingapi2.Repositories;
 
 namespace shoppingapi2.Controllers
 {
-    [ApiController]
+    /*[ApiController]
     [Route("api/[controller]")]
     public class CatogoryController : ControllerBase
     {
@@ -51,5 +47,5 @@ namespace shoppingapi2.Controllers
             var result = await _catogoryRepository.DeleteAsync(id);
             return Ok(result == true ? $"{id} number is deleted" : $"{id}number is not found!!");
         }
-    }
+    }*/
 }

@@ -7,7 +7,7 @@ using shoppingapi2.Repositories;
 
 namespace shoppingapi2.Controllers
 {
-    [ApiController]
+    /*[ApiController]
     [Route("api/[controller]")]
     public class ProductController : ControllerBase
     {
@@ -95,5 +95,5 @@ namespace shoppingapi2.Controllers
                 return Ok("Failed to delete Image");
 
         }
-    }
+    }*/
 }
