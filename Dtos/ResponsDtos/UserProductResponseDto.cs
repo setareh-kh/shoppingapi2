@@ -11,7 +11,7 @@ namespace shoppingapi2.Dtos.ResponseDtos
         
         public required int Discount { get; set; }
         
-        public required int CatogoryId { get; set; }
+        public required int CategoryId { get; set; }
 
     }
 }

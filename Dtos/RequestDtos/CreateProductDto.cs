@@ -19,11 +19,9 @@ namespace shoppingapi2.Dtos.RequestDtos
         [DefaultValue(0)]
         public required int Discount { get; set; }
         [Required]
-        public required bool Available { get; set; }
-        [Required]
         public required bool Active { get; set; }
         [Required]
-        public required int CatogoryId { get; set; }
+        public required int CategoryId { get; set; }
         /*[Required(ErrorMessage ="please upload file")]
         [AllowedExtnsions(new[] {".jpg",".jepg",".png",".bmp",".gif",".tga",".tiff",".jfif"},isList:true)]
         [IsValidSizeFile(131072,isList:true)]//13107=128KB

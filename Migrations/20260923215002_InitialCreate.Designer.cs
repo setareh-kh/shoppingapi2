@@ -11,8 +11,8 @@ using shoppingapi2.Models;
 namespace shoppingapi2.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20260923101728_removenameprop")]
-    partial class removenameprop
+    [Migration("20260923215002_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -22,7 +22,7 @@ namespace shoppingapi2.Migrations
                 .HasAnnotation("ProductVersion", "7.0.3")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
-            modelBuilder.Entity("shoppingapi2.Models.Catogory", b =>
+            modelBuilder.Entity("shoppingapi2.Models.Category", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -35,7 +35,7 @@ namespace shoppingapi2.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Catogories");
+                    b.ToTable("Categories");
                 });
 
             modelBuilder.Entity("shoppingapi2.Models.Image", b =>
@@ -143,7 +143,7 @@ namespace shoppingapi2.Migrations
                     b.Property<bool>("Available")
                         .HasColumnType("tinyint(1)");
 
-                    b.Property<int>("CatogoryId")
+                    b.Property<int>("CategoryId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("CreateAt")
@@ -168,7 +168,7 @@ namespace shoppingapi2.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CatogoryId");
+                    b.HasIndex("CategoryId");
 
                     b.ToTable("Products");
                 });
@@ -237,13 +237,13 @@ namespace shoppingapi2.Migrations
 
             modelBuilder.Entity("shoppingapi2.Models.Product", b =>
                 {
-                    b.HasOne("shoppingapi2.Models.Catogory", "Catogory")
+                    b.HasOne("shoppingapi2.Models.Category", "Category")
                         .WithMany()
-                        .HasForeignKey("CatogoryId")
+                        .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Catogory");
+                    b.Navigation("Category");
                 });
 
             modelBuilder.Entity("shoppingapi2.Models.Order", b =>

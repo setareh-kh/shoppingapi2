@@ -4,7 +4,7 @@ namespace shoppingapi2.Models
 {
     public class OrderDetails : ISqlEntity
     {
-        public int Id { get; set; }
+       [Key] public int Id { get; set; }
 
         // FK -> Order
         [Required]

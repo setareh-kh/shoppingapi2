@@ -28,7 +28,7 @@ builder.Services.AddAutoMapper(typeof(Program));
 //install Irepositor and repository as services
 builder.Services.AddScoped<IUserRepository,UserRepository>();
 builder.Services.AddScoped<IProductRepository,ProductRepository>();
-builder.Services.AddScoped<ICatogoryRepository,CatogoryRepository>();
+builder.Services.AddScoped<ICategoryRepository,CategoryRepository>();
 builder.Services.AddScoped<IImageRepository,ImageRepository>();
 builder.Services.AddScoped<IOrderRepository,OrderRepository>();
 builder.Services.AddScoped<IOrderDetailsRepository,OrderDetailsRepository>();
@@ -36,6 +36,9 @@ builder.Services.AddScoped(typeof(IBaseRepository<>),typeof(BaseRepository<>));
 //install IService and Service as services
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IProductService, ProductService>();
+builder.Services.AddScoped<IOrderService, OrderService>();
+builder.Services.AddScoped<ICategoryService, CategoryService>();
+
 
 
 

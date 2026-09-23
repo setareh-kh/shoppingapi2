@@ -47,7 +47,6 @@ namespace shoppingapi2.Services.Service
          if (existingUser != null)
             return null;
          var user = _mapper.Map<User>(dto);
-         user.Type = 1;
          user.CreateAt = DateTime.UtcNow;
          await _userRepository.InsertAsync(user);
 

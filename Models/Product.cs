@@ -22,8 +22,8 @@ namespace shoppingapi2.Models
         public  DateTime? UpdateDate { get; set; }
         //Fk 
         [Required]
-        public required int CatogoryId { get; set; }
-        public Catogory? Catogory { get; set; }
+        public required int CategoryId { get; set; }
+        public Category? Category { get; set; }
 
     }
 }

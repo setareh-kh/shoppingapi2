@@ -5,23 +5,25 @@ using shoppingapi2.Models;
 
 namespace shoppingapi2
 {
-    public class MapperProfile:Profile
+    public class MapperProfile : Profile
     {
         public MapperProfile()
         {
             //mappinq requestDtos to models
-            CreateMap<CreateUserDto,User>();
-            CreateMap<UpdateUserDto,User>();
-            CreateMap<CreateProductDto,Product>();
-            CreateMap<UpdateProductDto,Product>();
-            CreateMap<UpdateOrderDto,Order>();
+            CreateMap<CreateUserDto, User>();
+            CreateMap<UpdateUserDto, User>();
+            CreateMap<CreateProductDto, Product>();
+            CreateMap<UpdateProductDto, Product>();
+            CreateMap<CreateCategoryDto, Category>();
+            CreateMap<UpdateCategoryDto, Category>();
 
             //mapping Entity models to responsDtos 
-            CreateMap<User,UserUserResponseDto>();
-            CreateMap<User,AdminUserResponseDto>();
-            CreateMap<Product,UserProductResponseDto>();
+            CreateMap<User, UserUserResponseDto>();
+            CreateMap<User, AdminUserResponseDto>();
+            CreateMap<Product, UserProductResponseDto>();
             CreateMap<Product, AdminProductResponseDto>();
-            
+            CreateMap<Category, CategoryResponseDto>();
+
 
         }
     }

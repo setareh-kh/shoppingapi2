@@ -9,12 +9,12 @@ namespace shoppingapi2.Services.Service
     public class ProductService : IProductService
     {
         private readonly IProductRepository _productRepository;
-        private readonly ICatogoryRepository _catogoryRepository;
+        private readonly ICategoryRepository _categoryRepository;
         private readonly IMapper _mapper;
-        public ProductService(IProductRepository productRepository, ICatogoryRepository catogoryRepository, IMapper mapper)
+        public ProductService(IProductRepository productRepository, ICategoryRepository categoryRepository, IMapper mapper)
         {
             _productRepository = productRepository;
-            _catogoryRepository = catogoryRepository;
+            _categoryRepository = categoryRepository;
             _mapper = mapper;
         }
         public async Task<AdminProductResponseDto?> GetByIdAsync(int id)
@@ -36,7 +36,7 @@ namespace shoppingapi2.Services.Service
         public async Task<AdminProductResponseDto?> CreateAsync(CreateProductDto dto)
         {
             // 1. بررسی وجود Category
-            var category = await _catogoryRepository.GetByIdAsync(dto.CatogoryId);
+            var category = await _categoryRepository.GetByIdAsync(dto.CategoryId);
 
             if (category == null)
                 return null;
@@ -46,6 +46,8 @@ namespace shoppingapi2.Services.Service
 
             // 3. تنظیم اطلاعاتی که Client نباید تعیین کند
             product.CreateAt = DateTime.UtcNow;
+            product.CreateAt = DateTime.UtcNow;
+            product.Available = product.Quantity > 0;
 
             // 4. ذخیره
             await _productRepository.Insert(product);
@@ -62,16 +64,19 @@ namespace shoppingapi2.Services.Service
                 return false;
 
             // 2. بررسی Category
-            var category = await _catogoryRepository.GetByIdAsync(dto.CatogoryId);
+            var category = await _categoryRepository.GetByIdAsync(dto.CategoryId);
 
             if (category == null)
                 return false;
 
             // 3. تغییر اطلاعات Product
             _mapper.Map(dto, product);
+            // Business Rule
+            product.Available = product.Quantity > 0;
+            product.UpdateDate = DateTime.UtcNow;
+
             // 4. ثبت تغییر
             _productRepository.Update(product);
-            //آپدیت مربوط به عکس ها 
             await _productRepository.SaveChangesAsync();
 
             return true;
