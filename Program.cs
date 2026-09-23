@@ -5,6 +5,8 @@ using shoppingapi2.Repositories;
 using shoppingapi2.Repositories.Repositories;
 using Newtonsoft.Json;
 using Org.BouncyCastle.Asn1.X509.Qualified;
+using shoppingapi2.Services;
+using shoppingapi2.Services.Service;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -31,6 +33,8 @@ builder.Services.AddScoped<IImageRepository,ImageRepository>();
 builder.Services.AddScoped<IOrderRepository,OrderRepository>();
 builder.Services.AddScoped<IOrderDetailsRepository,OrderDetailsRepository>();
 builder.Services.AddScoped(typeof(IBaseRepository<>),typeof(BaseRepository<>));
+//install IService and Service as services
+builder.Services.AddScoped<IUserService, UserService>();
 
 
 

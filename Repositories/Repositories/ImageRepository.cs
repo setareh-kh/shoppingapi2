@@ -54,7 +54,7 @@ namespace shoppingapi2.Repositories.Repositories
         public async Task<bool> DeleteAsync(string itemType, int itemid)
         {
             var imgs = await _appDbContext.Images.Where(x => x.ItemType == itemType && x.ItemId == itemid).ToListAsync();
-            if (imgs == null) return false;
+            if (!imgs.Any()) return false;
             foreach (var image in imgs)
             {
                 var dltFile = $"{Directory.GetCurrentDirectory()}\\Assets\\{itemType}s\\{image.Name}";

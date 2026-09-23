@@ -31,6 +31,33 @@ namespace shoppingapi2.Services.Service
             response.Images = imgLst;
             return response ;
         }
+        /*
+            CreateProduct
+GetProduct
+GetProducts
+UpdateProduct
+DeleteProduct
+GetProductsByCategory
+        */
+        public async Task<List<Product>> GetByCategoryAsync(int categoryId)
+{
+    return await _productRepository
+        .WhereAsync(x => x.CatogoryId == categoryId);
+}
+        /*
+        Product وجود دارد؟
+       ↓
+Active است؟
+       ↓
+Available است؟
+       ↓
+Quantity کافی است؟
+       ↓
+قیمت فعلی چقدر است؟
+       ↓
+Discount چقدر است؟
+        */
+
 
 
     }

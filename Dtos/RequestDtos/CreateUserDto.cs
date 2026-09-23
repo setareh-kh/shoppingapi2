@@ -3,7 +3,7 @@ using shoppingapi2.Validators;
 
 namespace shoppingapi2.Dtos.RequestDtos
 {
-    public class AddUserDto
+    public class CreateUserDto
     {
         [Required(ErrorMessage = "please enter your Name"), MaxLength(250)]
         public required string Name { get; set; }

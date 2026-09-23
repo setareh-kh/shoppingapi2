@@ -5,8 +5,6 @@ namespace shoppingapi2.Models
     public class Order : ISqlEntity
     {
         public int Id { get; set; }
-        [Required, MaxLength(250)]
-        public required string Name { get; set; }
         [Required]
         public required decimal TotalPrice { get; set; }
         [Required]
@@ -15,7 +13,9 @@ namespace shoppingapi2.Models
         //Fk 
         [Required]
         public required int UserId { get; set; }
-        public User? User { get; set; }
+        public User User { get; set; } = null!;
+        //
+        public ICollection<OrderDetails> OrderDetails { get; set; } = new List<OrderDetails>();
 
     }
 }

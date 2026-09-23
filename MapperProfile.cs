@@ -10,7 +10,7 @@ namespace shoppingapi2
         public MapperProfile()
         {
             //mappinq requestDtos to models
-            CreateMap<AddUserDto,User>();
+            CreateMap<CreateUserDto,User>();
             CreateMap<UpdateUserDto,User>();
             CreateMap<AddProductDto,Product>();
             CreateMap<UpdateProductDto,Product>();

@@ -2,17 +2,18 @@ using System.ComponentModel.DataAnnotations;
 
 namespace shoppingapi2.Models
 {
-    public class OrderDetails:ISqlEntity
+    public class OrderDetails : ISqlEntity
     {
         public int Id { get; set; }
-                
-        //Fk 
+
+        // FK -> Order
         [Required]
         public required int OrderId { get; set; }
-        public Order? Order{ get; set; }
+        public Order Order { get; set; } = null!;
+        // FK -> Product
         [Required]
         public required int ProductId { get; set; }
-        public Product? Product{ get; set; }
+        public Product Product { get; set; }  = null!;
         //
         [Required]
         public required int UnitPrice { get; set; }
@@ -22,7 +23,7 @@ namespace shoppingapi2.Models
         public required int Quantity { get; set; }
         [Required]
         public required DateTime CreateAt { get; set; }
-        public  DateTime? UpdateDate { get; set; }
+        public DateTime? UpdateDate { get; set; }
 
     }
 }

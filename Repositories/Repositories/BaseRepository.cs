@@ -17,6 +17,10 @@ public class BaseRepository<T> where T : class, ISqlEntity
         await AppDbContext.Set<T>().AddAsync(entity);
         await AppDbContext.SaveChangesAsync();
     }
+    public async Task Insert(T entity)
+    {
+        await AppDbContext.Set<T>().AddAsync(entity);
+    }
     //Read
     public async Task<List<T>> GetAllAsync()
     {
@@ -38,6 +42,11 @@ public class BaseRepository<T> where T : class, ISqlEntity
         return await AppDbContext.Set<T>().Where(predicate).ToListAsync();
     }
     //Update 
+    public void Update(T entity)
+    {
+        AppDbContext.Set<T>().Update(entity);
+    }
+
     public async Task<bool> UpdateAsync(T entity, T newValue)
     {
         AppDbContext.Entry(entity).CurrentValues.SetValues(newValue);
@@ -56,6 +65,10 @@ public class BaseRepository<T> where T : class, ISqlEntity
         else return false;
     }
     //Delete
+    public void Delete(T entity)
+    {
+        AppDbContext.Set<T>().Remove(entity);
+    }
     public async Task<bool> DeleteAsync(T entity)
     {
         AppDbContext.Set<T>().Remove(entity);
