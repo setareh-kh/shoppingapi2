@@ -35,6 +35,7 @@ builder.Services.AddScoped<IOrderDetailsRepository,OrderDetailsRepository>();
 builder.Services.AddScoped(typeof(IBaseRepository<>),typeof(BaseRepository<>));
 //install IService and Service as services
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IProductService, ProductService>();
 
 
 

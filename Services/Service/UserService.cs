@@ -3,7 +3,7 @@ using shoppingapi2.Dtos.RequestDtos;
 using shoppingapi2.Dtos.ResponseDtos;
 using shoppingapi2.Models;
 using shoppingapi2.Repositories;
-using shoppingapi2.Services;
+
 
 namespace shoppingapi2.Services.Service
 {
@@ -11,7 +11,6 @@ namespace shoppingapi2.Services.Service
    {
       private readonly IUserRepository _userRepository;
       private readonly IMapper _mapper;
-
       public UserService(IUserRepository userRepository, IMapper mapper)
       {
          _userRepository = userRepository;
@@ -28,14 +27,16 @@ namespace shoppingapi2.Services.Service
       {
          var users = await _userRepository.GetAllAsync();
          return _mapper.Map<List<UserUserResponseDto>>(users);
+         
       }
 
-      public async Task<UserUserResponseDto?> GetByMobileAsync(string mobile)
+      public async Task<AdminUserResponseDto?> GetByMobileAsync(string mobile)
       {
          var user = await _userRepository.FindAsync(x => x.Mobile == mobile);
          if (user == null)
             return null;
-         return _mapper.Map<UserUserResponseDto>(user);
+         return _mapper.Map<AdminUserResponseDto>(user);
+         
       }
 
       public async Task<UserUserResponseDto?> CreateAsync(CreateUserDto dto)

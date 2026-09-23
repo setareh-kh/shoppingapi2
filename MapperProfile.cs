@@ -12,13 +12,10 @@ namespace shoppingapi2
             //mappinq requestDtos to models
             CreateMap<CreateUserDto,User>();
             CreateMap<UpdateUserDto,User>();
-            CreateMap<AddProductDto,Product>();
+            CreateMap<CreateProductDto,Product>();
             CreateMap<UpdateProductDto,Product>();
-            CreateMap<CatogoryDto,Catogory>();
-            CreateMap<AddOrderDto,Order>();
             CreateMap<UpdateOrderDto,Order>();
-            CreateMap<AddOrderDetailsDto,OrderDetails>();
-            CreateMap<UpdateOrderDetailsDto,OrderDetails>();
+
             //mapping Entity models to responsDtos 
             CreateMap<User,UserUserResponseDto>();
             CreateMap<User,AdminUserResponseDto>();

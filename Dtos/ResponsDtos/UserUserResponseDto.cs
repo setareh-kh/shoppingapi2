@@ -7,7 +7,7 @@ namespace shoppingapi2.Dtos.ResponseDtos
        
         public required string Name { get; set; }
         public required string Mobile { get; set; }
-        public Image? ImageProfile { get; set; }
+        public string? ImageProfile { get; set; }
         
         
 

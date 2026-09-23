@@ -5,10 +5,8 @@ namespace shoppingapi2.Repositories.Repositories
 {
     public class ImageRepository :BaseRepository<Image>, IImageRepository
     {
-        protected readonly AppDbContext _appDbContext;
         public ImageRepository(AppDbContext context):base(context)
         {
-            _appDbContext = context;
         }
         private async Task<string> StoreToFileAsync(string uniqStart, string lastPath, IFormFile file)
         {
@@ -39,21 +37,21 @@ namespace shoppingapi2.Repositories.Repositories
                 Url = $"/Assets/{itemType}s/{name}",
                 Priority = priority
             };
-            await _appDbContext.Images.AddAsync(image);
-            await _appDbContext.SaveChangesAsync();
+            await AppDbContext.Images.AddAsync(image);
+            await AppDbContext.SaveChangesAsync();
             return image;
         }
         public async Task<Image?> GetAsync(string itemType, int itemId)
         {
-            return await _appDbContext.Images.FirstOrDefaultAsync(image => image.ItemType == itemType && image.ItemId == itemId);
+            return await AppDbContext.Images.FirstOrDefaultAsync(image => image.ItemType == itemType && image.ItemId == itemId);
         }
         public async Task<List<Image>?> GetImagesAsync(string itemType, int itemId)
         {
-            return await _appDbContext.Images.Where(x => x.ItemType == itemType && x.ItemId == itemId).ToListAsync();
+            return await AppDbContext.Images.Where(x => x.ItemType == itemType && x.ItemId == itemId).ToListAsync();
         }
         public async Task<bool> DeleteAsync(string itemType, int itemid)
         {
-            var imgs = await _appDbContext.Images.Where(x => x.ItemType == itemType && x.ItemId == itemid).ToListAsync();
+            var imgs = await AppDbContext.Images.Where(x => x.ItemType == itemType && x.ItemId == itemid).ToListAsync();
             if (!imgs.Any()) return false;
             foreach (var image in imgs)
             {
@@ -62,9 +60,9 @@ namespace shoppingapi2.Repositories.Repositories
                 //Console.WriteLine(image.Url);
                 //Console.WriteLine(dltFile);
                 System.IO.File.Delete(dltFile);
-                _appDbContext.Images.Remove(image);
+                AppDbContext.Images.Remove(image);
             }
-            await _appDbContext.SaveChangesAsync();
+            await AppDbContext.SaveChangesAsync();
             return true;
         }
         public async Task<bool> UpdateAsync(IFormFile file, string itemType, int itemId, int priority = 0, bool isAdded=true)

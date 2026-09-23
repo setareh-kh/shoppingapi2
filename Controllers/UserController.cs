@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
 using shoppingapi2.Dtos.RequestDtos;
-using shoppingapi2.Models;
 using shoppingapi2.Services;
 
 namespace shoppingapi2.Controllers;
@@ -46,7 +45,7 @@ public class UserController : ControllerBase
         return Ok(user);
     }
 
-    [HttpPost("create")]
+    [HttpPost("Add")]
     public async Task<IActionResult> Create(CreateUserDto dto)
     {
         var result = await _userService.CreateAsync(dto);
@@ -58,7 +57,7 @@ public class UserController : ControllerBase
     }
 
     [HttpPut("{id:int}")]
-    public async Task<IActionResult> Update(int id,UpdateUserDto dto)
+    public async Task<IActionResult> Update(int id, UpdateUserDto dto)
     {
         var result = await _userService.UpdateAsync(id, dto);
 
