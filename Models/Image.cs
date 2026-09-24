@@ -20,5 +20,6 @@ namespace shoppingapi2.Models
         public int Priority { get; set; }
         //public DateTime? CreateAt { get; set; }
 
+
     }
 }

@@ -25,7 +25,7 @@ namespace shoppingapi2.Repositories.Repositories
             }
             return fileName;
         }
-        public async Task<Image> SaveAsync(IFormFile file, string itemType, int itemId, int priority = 0)
+        public async Task<Image> SaveAsync(IFormFile file, string itemType, int itemId, int priority)
         {
             string nameStart = itemId.ToString();
             var name = await StoreToFileAsync(nameStart, $"{itemType}s", file);
@@ -34,7 +34,7 @@ namespace shoppingapi2.Repositories.Repositories
                 Name = name,
                 ItemType = itemType,
                 ItemId = itemId,
-                Url = $"/Assets/{itemType}s/{name}",
+                Url = Path.Combine($"Assets" , $"{itemType}s",$"{name}"),
                 Priority = priority
             };
             await AppDbContext.Images.AddAsync(image);
@@ -45,7 +45,7 @@ namespace shoppingapi2.Repositories.Repositories
         {
             return await AppDbContext.Images.FirstOrDefaultAsync(image => image.ItemType == itemType && image.ItemId == itemId);
         }
-        public async Task<List<Image>?> GetImagesAsync(string itemType, int itemId)
+        public async Task<List<Image>> GetImagesAsync(string itemType, int itemId)
         {
             return await AppDbContext.Images.Where(x => x.ItemType == itemType && x.ItemId == itemId).ToListAsync();
         }
@@ -59,17 +59,17 @@ namespace shoppingapi2.Repositories.Repositories
                 //Console.WriteLine(Directory.GetCurrentDirectory());
                 //Console.WriteLine(image.Url);
                 //Console.WriteLine(dltFile);
-                System.IO.File.Delete(dltFile);
+                File.Delete(dltFile);
                 AppDbContext.Images.Remove(image);
             }
             await AppDbContext.SaveChangesAsync();
             return true;
         }
-        public async Task<bool> UpdateAsync(IFormFile file, string itemType, int itemId, int priority = 0, bool isAdded=true)
+        /*public async Task<bool> UpdateAsync(IFormFile file, string itemType, int itemId, int priority, bool isAdded=true)
         {
             if (isAdded)
             {
-                await SaveAsync(file, itemType, itemId, priority = 1);
+                await SaveAsync(file, itemType, itemId);
                 return true;
             }
             else
@@ -83,6 +83,6 @@ namespace shoppingapi2.Repositories.Repositories
                 else return false;      
             }
 
-        }
+        }*/
     }
 }

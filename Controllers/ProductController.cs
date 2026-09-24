@@ -35,7 +35,7 @@ public class ProductController : ControllerBase
     }
 
     [HttpPost("Add")]
-    public async Task<IActionResult> Create(CreateProductDto dto)
+    public async Task<IActionResult> Create([FromForm] CreateProductDto dto)
     {
         var product = await _productService.CreateAsync(dto);
 
@@ -46,7 +46,7 @@ public class ProductController : ControllerBase
     }
 
     [HttpPut("Update/{id:int}")]
-    public async Task<IActionResult> Update( int id,UpdateProductDto dto)
+    public async Task<IActionResult> Update([FromForm]UpdateProductDto dto, int id)
     {
         var result = await _productService.UpdateAsync(id, dto);
 

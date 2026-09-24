@@ -22,9 +22,10 @@ namespace shoppingapi2.Dtos.RequestDtos
         public required bool Active { get; set; }
         [Required]
         public required int CategoryId { get; set; }
-        /*[Required(ErrorMessage ="please upload file")]
+        [Required(ErrorMessage ="please upload file")]
         [AllowedExtnsions(new[] {".jpg",".jepg",".png",".bmp",".gif",".tga",".tiff",".jfif"},isList:true)]
         [IsValidSizeFile(131072,isList:true)]//13107=128KB
-        public required List<IFormFile> Files { get; set; }*/
+        public List<IFormFile>? Images { get; set; }
+        
     }
 }

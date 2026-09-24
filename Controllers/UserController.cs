@@ -46,7 +46,7 @@ public class UserController : ControllerBase
     }
 
     [HttpPost("Add")]
-    public async Task<IActionResult> Create(CreateUserDto dto)
+    public async Task<IActionResult> Create([FromForm] CreateUserDto dto)
     {
         var result = await _userService.CreateAsync(dto);
 
@@ -57,7 +57,7 @@ public class UserController : ControllerBase
     }
 
     [HttpPut("{id:int}")]
-    public async Task<IActionResult> Update(int id, UpdateUserDto dto)
+    public async Task<IActionResult> Update([FromForm] UpdateUserDto dto, int id)
     {
         var result = await _userService.UpdateAsync(id, dto);
 

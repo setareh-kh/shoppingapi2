@@ -10,11 +10,13 @@ namespace shoppingapi2.Services.Service
     {
         private readonly IProductRepository _productRepository;
         private readonly ICategoryRepository _categoryRepository;
+        private readonly IImageService _imageService;
         private readonly IMapper _mapper;
-        public ProductService(IProductRepository productRepository, ICategoryRepository categoryRepository, IMapper mapper)
+        public ProductService(IProductRepository productRepository, ICategoryRepository categoryRepository, IImageService imageService, IMapper mapper)
         {
             _productRepository = productRepository;
             _categoryRepository = categoryRepository;
+            _imageService = imageService;
             _mapper = mapper;
         }
         public async Task<AdminProductResponseDto?> GetByIdAsync(int id)
@@ -52,7 +54,17 @@ namespace shoppingapi2.Services.Service
             // 4. ذخیره
             await _productRepository.Insert(product);
             await _productRepository.SaveChangesAsync();
-            // 5. تبدیل Entity به Response DTO
+            // 5. ذخیره تصاویر
+            if (dto.Images != null && dto.Images.Count > 0)
+            {
+                int priority = 0;
+                foreach (var image in dto.Images)
+                {
+                    await _imageService.SaveAsync(image, "Product", product.Id, priority);
+                    priority++;
+                }
+            }
+            // 6. تبدیل Entity به Response DTO
             return _mapper.Map<AdminProductResponseDto>(product);
         }
         public async Task<bool> UpdateAsync(int id, UpdateProductDto dto)
@@ -71,13 +83,32 @@ namespace shoppingapi2.Services.Service
 
             // 3. تغییر اطلاعات Product
             _mapper.Map(dto, product);
-            // Business Rule
+            // 4.Business Rule
             product.Available = product.Quantity > 0;
             product.UpdateDate = DateTime.UtcNow;
 
-            // 4. ثبت تغییر
+            // 5. ذخیره تغییرات Product
             _productRepository.Update(product);
-            await _productRepository.SaveChangesAsync();
+            var result = await _productRepository.SaveChangesAsync();
+            if (!result)
+                return false;
+            // 6. اگر Image ارسال نشده، به تصاویر دست نزن
+            if (dto.Images == null || dto.Images.Count == 0)
+                return true;
+            // 7. اگر Add == false
+            // تصاویر قبلی حذف شوند
+            if (!dto.AddImage)
+            {
+                await _imageService.DeleteAsync("Product",product.Id);
+            }
+            // 8. اضافه کردن تصاویر جدید
+            int priority = 0;
+
+            foreach (var image in dto.Images)
+            {
+                await _imageService.SaveAsync(image,"Product",product.Id,priority);
+                priority++;
+            }
 
             return true;
         }
