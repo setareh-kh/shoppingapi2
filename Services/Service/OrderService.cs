@@ -11,11 +11,7 @@ namespace shoppingapi2.Services.Service
         private readonly IOrderDetailsRepository _orderDetailsRepository;
         private readonly IUserRepository _userRepository;
         private readonly IProductRepository _productRepository;
-        public OrderService(
-            IOrderRepository orderRepository,
-            IOrderDetailsRepository orderDetailsRepository,
-            IUserRepository userRepository,
-            IProductRepository productRepository)
+        public OrderService(IOrderRepository orderRepository, IOrderDetailsRepository orderDetailsRepository, IUserRepository userRepository, IProductRepository productRepository)
         {
             _orderRepository = orderRepository;
             _orderDetailsRepository = orderDetailsRepository;
@@ -26,11 +22,8 @@ namespace shoppingapi2.Services.Service
         {
             // 1. بررسی User
             var user = await _userRepository.GetByIdAsync(dto.UserId);
-
             if (user == null)
                 return null;
-
-
             // 2. ایجاد Order
             var order = new Order
             {
@@ -38,7 +31,6 @@ namespace shoppingapi2.Services.Service
                 CreateAt = DateTime.UtcNow,
                 TotalPrice = 0
             };
-
             await _orderRepository.Insert(order);
             await _orderRepository.SaveChangesAsync();
             decimal totalPrice = 0;
@@ -46,28 +38,19 @@ namespace shoppingapi2.Services.Service
             foreach (var item in dto.Items)
             {
                 var product = await _productRepository.GetByIdAsync(item.ProductId);
-
                 if (product == null)
                     return null;
-
-
                 // 4. بررسی موجودی
                 if (product.Quantity < item.Quantity)
                     return null;
                 // محاسبه تخفیف
-                decimal discountAmount =
-                    product.Price * product.Discount / 100m;
+                decimal discountAmount = product.Price * product.Discount / 100m;
                 // قیمت نهایی هر واحد
-                decimal finalUnitPrice =
-                    product.Price - discountAmount;
-
+                decimal finalUnitPrice = product.Price - discountAmount;
                 // قیمت کل این محصول
-                decimal itemTotal =
-                    finalUnitPrice * item.Quantity;
-
+                decimal itemTotal = finalUnitPrice * item.Quantity;
                 // اضافه کردن به مجموع سفارش
                 totalPrice += itemTotal;
-
                 // 5. ایجاد OrderDetails
                 var orderDetail = new OrderDetails
                 {
@@ -79,8 +62,6 @@ namespace shoppingapi2.Services.Service
                     Quantity = item.Quantity,
                     CreateAt = DateTime.UtcNow
                 };
-
-
                 await _orderDetailsRepository.Insert(orderDetail);
                 // 6. کاهش موجودی
                 product.Quantity -= item.Quantity;
@@ -93,7 +74,6 @@ namespace shoppingapi2.Services.Service
             _orderRepository.Update(order);
             // 7. ذخیره تمام تغییرات
             await _orderRepository.SaveChangesAsync();
-
             // 8. ساخت Response
             return new OrderResponseDto
             {

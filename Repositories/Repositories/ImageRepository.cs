@@ -34,7 +34,7 @@ namespace shoppingapi2.Repositories.Repositories
                 Name = name,
                 ItemType = itemType,
                 ItemId = itemId,
-                Url = Path.Combine($"Assets" , $"{itemType}s",$"{name}"),
+                Url = Path.Combine($"\\Assets" , $"{itemType}s",$"{name}"),
                 Priority = priority
             };
             await AppDbContext.Images.AddAsync(image);

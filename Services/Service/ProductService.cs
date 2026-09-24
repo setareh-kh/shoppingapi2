@@ -25,14 +25,20 @@ namespace shoppingapi2.Services.Service
 
             if (product == null)
                 return null;
-
-            return _mapper.Map<AdminProductResponseDto>(product);
+            var response= _mapper.Map<AdminProductResponseDto>(product);
+            response.Images= await _imageService.GetImagesAsync("Product",product.Id);
+            return response;
         }
         public async Task<List<AdminProductResponseDto>> GetAllAsync()
         {
             var products = await _productRepository.GetAllAsync();
+            var productLst= _mapper.Map<List<AdminProductResponseDto>>(products);
+            foreach (var product in productLst)
+            {
+             product.Images = await _imageService.GetImagesAsync("Product",product.Id);  
+            }
+            return productLst;
 
-            return _mapper.Map<List<AdminProductResponseDto>>(products);
         }
         //addProduct for admin
         public async Task<AdminProductResponseDto?> CreateAsync(CreateProductDto dto)
@@ -121,10 +127,8 @@ namespace shoppingapi2.Services.Service
 
             _productRepository.Delete(product);
             await _productRepository.SaveChangesAsync();
-
+            await _imageService.DeleteAsync("Product",product.Id);
             return true;
         }
-
-
     }
 }
