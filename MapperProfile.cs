@@ -23,6 +23,8 @@ namespace shoppingapi2
             CreateMap<Product, UserProductResponseDto>();
             CreateMap<Product, AdminProductResponseDto>();
             CreateMap<Category, CategoryResponseDto>();
+            CreateMap<Product, ProductResponseDto>();
+
 
 
         }

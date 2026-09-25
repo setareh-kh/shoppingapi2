@@ -14,6 +14,13 @@ public class ProductController : ControllerBase
     {
         _productService = productService;
     }
+    [HttpGet("Filter")]
+    public async Task<IActionResult> Filter(ProductFilterDto filterDto)
+    {
+        var result = await _productService.Filter(filterDto);
+            return Ok(result);
+    }
+
 
     [HttpGet("All")]
     public async Task<IActionResult> GetAll()
@@ -46,7 +53,7 @@ public class ProductController : ControllerBase
     }
 
     [HttpPut("Update/{id:int}")]
-    public async Task<IActionResult> Update([FromForm]UpdateProductDto dto, int id)
+    public async Task<IActionResult> Update([FromForm] UpdateProductDto dto, int id)
     {
         var result = await _productService.UpdateAsync(id, dto);
 

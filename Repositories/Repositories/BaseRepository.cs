@@ -1,5 +1,7 @@
 using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
+using shoppingapi2.Dtos.RequestDtos;
+using shoppingapi2.Dtos.ResponseDtos;
 using shoppingapi2.Models;
 
 namespace shoppingapi2.Repositories.Repositories;
@@ -95,5 +97,60 @@ public class BaseRepository<T> where T : class, ISqlEntity
     }
     //other common operations
     public async Task<bool> SaveChangesAsync() => await AppDbContext.SaveChangesAsync() > 0;
+
+    public async Task<int> CountAsync(Expression<Func<T, bool>> predicate) =>
+        await AppDbContext.Set<T>().CountAsync(predicate);
+
+    public async Task<long> SumAsync(Expression<Func<T, bool>> predicate,Expression<Func<T, long>> selector) =>
+        await AppDbContext.Set<T>().Where(predicate).SumAsync(selector);
+
+     public string ToCamelCase(string s)
+    {
+        if (s.Length < 2) return s.ToLower();
+        return char.ToUpper(s[0]) + s[1..];
+    }
+    public async Task<PaginateResponseDto<T>> Paginate(BaseFilterRequest filter,IQueryable<T> queryable)
+    {
+        var page = filter.Page is > 0 ? filter.Page : 1;
+        var pageSize = filter.Pager > 0 ? filter.Pager : 12;
+
+        if (!string.IsNullOrWhiteSpace(filter.OrderBy))
+        {
+            var items = filter.OrderBy.Split(":");
+            var orderBy = items[0];
+            var desc = items[1];
+
+            Func<IQueryable<T>, IOrderedQueryable<T>> orderFunc =
+                desc == "desc"
+                    ? data => data.OrderByDescending(x => EF.Property<object>(x!, ToCamelCase(orderBy)))
+                    : data => data.OrderBy(x => EF.Property<object>(x!, ToCamelCase(orderBy)));
+
+            queryable = orderFunc(queryable);
+        }
+        else
+        {
+            queryable = queryable.OrderByDescending(x => EF.Property<object>(x!, ToCamelCase("Id")));
+        }
+
+        var res = await queryable
+            .Skip((int)((page - 1) * pageSize))
+            .Take((int)pageSize)
+            .ToListAsync();
+
+        var counts = 0;
+        if (filter.Countable == true)
+        {
+            counts = await queryable.CountAsync();
+        }
+
+        return new PaginateResponseDto<T>()
+        {
+            Items = res,
+            Page = page,
+            Pages = (int)Math.Ceiling(counts / (float)pageSize),
+            Pager = pageSize,
+            Total = counts
+        };
+    }
 
 }

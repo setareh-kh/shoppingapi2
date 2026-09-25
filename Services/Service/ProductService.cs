@@ -19,6 +19,21 @@ namespace shoppingapi2.Services.Service
             _imageService = imageService;
             _mapper = mapper;
         }
+
+        public async Task<PaginateResponseDto<ProductResponseDto>> Filter(ProductFilterDto filterDto)
+           {
+            var res = await _productRepository.Filter(filterDto);
+            return new PaginateResponseDto<ProductResponseDto>()
+            {
+                Page = res.Page,
+                Pager = res.Pager,
+                Total = res.Total,
+                Pages = res.Pages,
+                Items = res.Items?.Select(_mapper.Map<ProductResponseDto>).ToList()
+                //Items = _mapper.Map<List<ProductResponseDto>>(res.Items) 
+            };
+        }
+        
         public async Task<AdminProductResponseDto?> GetByIdAsync(int id)
         {
             var product = await _productRepository.GetByIdAsync(id);

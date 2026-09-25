@@ -5,6 +5,7 @@ namespace shoppingapi2.Services;
 
 public interface IProductService
 {
+    Task<PaginateResponseDto<Models.ProductResponseDto>> Filter(ProductFilterDto filterDto);
     Task<AdminProductResponseDto?> GetByIdAsync(int id);
     Task<List<AdminProductResponseDto>> GetAllAsync();
     Task<AdminProductResponseDto?> CreateAsync(CreateProductDto dto);
