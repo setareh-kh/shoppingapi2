@@ -15,7 +15,7 @@ public class ProductController : ControllerBase
         _productService = productService;
     }
     [HttpGet("Filter")]
-    public async Task<IActionResult> Filter(ProductFilterDto filterDto)
+    public async Task<IActionResult> Filter([FromQuery] ProductFilterDto filterDto)
     {
         var result = await _productService.Filter(filterDto);
             return Ok(result);
