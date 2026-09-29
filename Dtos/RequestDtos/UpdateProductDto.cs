@@ -9,7 +9,7 @@ namespace shoppingapi2.Dtos.RequestDtos
         [Required(ErrorMessage = "please enter product's name"), MaxLength(250)]
         public required string Name { get; set; }
         [Required(ErrorMessage = "please enter product's price")]
-        public required int Price { get; set; }
+        public required decimal Price { get; set; }
         [Required(ErrorMessage = "please enter Quantity")]
         [DefaultValue(2)]
         public required int Quantity { get; set; }

@@ -8,7 +8,7 @@ namespace shoppingapi2.Models
         [Required, MaxLength(250)]
         public required string Name { get; set; }
         [Required]
-        public required int Price { get; set; }
+        public required decimal Price { get; set; }
         [Required]
         public required int Quantity { get; set; }
         [Required]

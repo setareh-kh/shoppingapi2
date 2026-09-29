@@ -1,0 +1,10 @@
+namespace shoppingapi2.Dtos.ResponseDtos;
+
+public class UserResponseDto
+{
+    public int Id { get; set; }
+    public required string Name { get; set; }
+    public required string Mobile { get; set; }
+    public required byte Type { get; set; }// 0 is admin and 1 is user
+   
+}

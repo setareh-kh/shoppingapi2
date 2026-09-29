@@ -18,6 +18,18 @@ namespace shoppingapi2.Services.Service
          _imageService = imageService;
          _mapper = mapper;
       }
+      public async Task<PaginateResponseDto<UserResponseDto>> Filter(UserFilterDto filter)
+      {
+         var res = await _userRepository.Filter(filter);
+         return new PaginateResponseDto<UserResponseDto>()
+         {
+            Page = res.Page,
+            Pager = res.Pager,
+            Total = res.Total,
+            Pages = res.Pages,
+            Items = res.Items?.Select(_mapper.Map<UserResponseDto>).ToList()
+         };
+      }
       public async Task<UserUserResponseDto?> GetByIdAsync(int id)
       {
          var user = await _userRepository.GetByIdAsync(id);
@@ -77,13 +89,13 @@ namespace shoppingapi2.Services.Service
          user.Mobile = dto.Mobile;
          _userRepository.Update(user);
          await _userRepository.SaveChangesAsync();
-         if(dto.Image!=null)
-            if(dto.AddImage)
+         if (dto.Image != null)
+            if (dto.AddImage)
                await _imageService.SaveAsync(dto.Image, "User", user.Id, 1);
             else
             {
-             await  _imageService.DeleteAsync("User", user.Id);
-             await _imageService.SaveAsync(dto.Image, "User", user.Id, 1);
+               await _imageService.DeleteAsync("User", user.Id);
+               await _imageService.SaveAsync(dto.Image, "User", user.Id, 1);
             }
          return true;
       }
@@ -94,7 +106,7 @@ namespace shoppingapi2.Services.Service
 
          if (user == null)
             return false;
-         
+
          await _userRepository.DeleteAsync(user);
          await _imageService.DeleteAsync("User", user.Id);
          return true;

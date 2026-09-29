@@ -14,6 +14,12 @@ public class UserController : ControllerBase
     {
         _userService = userService;
     }
+    [HttpGet("Filter")]
+    public async Task<IActionResult> Filter([FromQuery] UserFilterDto filter)
+    {
+        var users = await _userService.Filter(filter);
+        return Ok(users);
+    }
 
     [HttpGet("All")]
     public async Task<IActionResult> GetAll()

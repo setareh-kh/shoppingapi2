@@ -19,6 +19,11 @@ namespace shoppingapi2.Services.Service
             _imageService = imageService;
             _mapper = mapper;
         }
+        public string ToCamelCase(string str)
+        {
+            return _productRepository.ToCamelCase(str);
+        }
+
 
         public async Task<PaginateResponseDto<ProductResponseDto>> Filter(ProductFilterDto filterDto)
            {

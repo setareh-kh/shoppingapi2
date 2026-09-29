@@ -11,5 +11,6 @@ public interface IProductService
     Task<AdminProductResponseDto?> CreateAsync(CreateProductDto dto);
     Task<bool> UpdateAsync(int id, UpdateProductDto dto);
     Task<bool> DeleteAsync(int id);
+    string ToCamelCase(string str);
 
 }

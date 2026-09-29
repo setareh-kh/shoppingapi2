@@ -16,7 +16,7 @@ namespace shoppingapi2.Models
         public Product Product { get; set; }  = null!;
         //
         [Required]
-        public required int UnitPrice { get; set; }
+        public required decimal UnitPrice { get; set; }
         [Required]
         public required int Discount { get; set; }
         [Required]

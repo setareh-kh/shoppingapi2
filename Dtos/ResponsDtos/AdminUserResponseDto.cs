@@ -2,12 +2,8 @@ using shoppingapi2.Models;
 
 namespace shoppingapi2.Dtos.ResponseDtos
 {
-    public class AdminUserResponseDto
+    public class AdminUserResponseDto:UserResponseDto
     {
-        public int Id { get; set; }
-        public required string Name { get; set; }
-        public required string Mobile { get; set; }
-        public required byte Type { get; set; }// 0 is admin and 1 is user
         public Image? ImageProfile { get; set; }
     }
 }
