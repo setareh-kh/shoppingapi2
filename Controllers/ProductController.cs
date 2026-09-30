@@ -13,12 +13,7 @@ public class ProductController : ControllerBase
     public ProductController(IProductService productService)
     {
         _productService = productService;
-    } 
-    /*[HttpGet("TestCamelcase/{str:string}")]
-    public IActionResult ToCamelCase(string str)
-    {
-       return Ok( _productService.ToCamelCase(str));
-    }*/
+    }
 
     [HttpGet("Filter")]
     public async Task<IActionResult> Filter([FromQuery] ProductFilterDto filterDto)

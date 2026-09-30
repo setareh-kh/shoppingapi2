@@ -15,11 +15,16 @@ public class OrderController : ControllerBase
         _orderService = orderService;
     }
 
-
+    [HttpGet("Filter")]
+    public async Task<IActionResult> Filter([FromQuery] OrderFilterDto filterDto)
+    {
+        var result = await _orderService.Filter(filterDto);
+        return Ok(result);
+    }
     [HttpPost("Add")]
     public async Task<IActionResult> Create(CreateOrderDto dto)
     {
-        var order= await _orderService.CreateAsync(dto);
+        var order = await _orderService.CreateAsync(dto);
 
         if (order == null)
             return BadRequest("Unable to create order.");

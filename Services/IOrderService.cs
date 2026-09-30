@@ -5,4 +5,6 @@ namespace shoppingapi2.Services;
 public interface IOrderService
 {
     Task<OrderResponseDto?> CreateAsync(CreateOrderDto dto);
+    Task<PaginateResponseDto<OrderFilterResponseDto>> Filter( OrderFilterDto filterDto);
+    
 }

@@ -1,3 +1,4 @@
+using AutoMapper;
 using shoppingapi2.Dtos.RequestDtos;
 using shoppingapi2.Dtos.ResponseDtos;
 using shoppingapi2.Models;
@@ -11,12 +12,32 @@ namespace shoppingapi2.Services.Service
         private readonly IOrderDetailsRepository _orderDetailsRepository;
         private readonly IUserRepository _userRepository;
         private readonly IProductRepository _productRepository;
-        public OrderService(IOrderRepository orderRepository, IOrderDetailsRepository orderDetailsRepository, IUserRepository userRepository, IProductRepository productRepository)
+        private readonly IMapper _mapper;
+        public OrderService(IOrderRepository orderRepository,
+                     IOrderDetailsRepository orderDetailsRepository,
+                     IUserRepository userRepository,
+                     IProductRepository productRepository,
+                     IMapper mapper)
         {
             _orderRepository = orderRepository;
             _orderDetailsRepository = orderDetailsRepository;
             _userRepository = userRepository;
             _productRepository = productRepository;
+            _mapper = mapper;
+        }
+
+        public async Task<PaginateResponseDto<OrderFilterResponseDto>> Filter(OrderFilterDto filterDto)
+        {
+            var res = await _orderRepository.Filter(filterDto);
+
+            return new PaginateResponseDto<OrderFilterResponseDto>()
+            {
+                Page = res.Page,
+                Pager = res.Pager,
+                Total = res.Total,
+                Pages = res.Pages,
+                Items = res.Items?.Select(_mapper.Map<OrderFilterResponseDto>).ToList()
+            };
         }
         public async Task<OrderResponseDto?> CreateAsync(CreateOrderDto dto)
         {

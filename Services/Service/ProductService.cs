@@ -19,11 +19,6 @@ namespace shoppingapi2.Services.Service
             _imageService = imageService;
             _mapper = mapper;
         }
-        public string ToCamelCase(string str)
-        {
-            return _productRepository.ToCamelCase(str);
-        }
-
 
         public async Task<PaginateResponseDto<ProductResponseDto>> Filter(ProductFilterDto filterDto)
            {
@@ -35,7 +30,6 @@ namespace shoppingapi2.Services.Service
                 Total = res.Total,
                 Pages = res.Pages,
                 Items = res.Items?.Select(_mapper.Map<ProductResponseDto>).ToList()
-                //Items = _mapper.Map<List<ProductResponseDto>>(res.Items) 
             };
         }
         
