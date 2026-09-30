@@ -1,10 +1,11 @@
 using Microsoft.AspNetCore.Mvc;
 using shoppingapi2.Dtos.RequestDtos;
 using shoppingapi2.Services;
+using shoppingapi2.Setting;
 
 
 [ApiController]
-[Route("api/[controller]")]
+[Route(ApiRoutes.Website.Category)]
 public class CategoryController : ControllerBase
 {
     private readonly ICategoryService _categoryService;
