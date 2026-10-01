@@ -1,5 +1,6 @@
 using Microsoft.Extensions.FileProviders;
 using shoppingapi2.Installer;
+using shoppingapi2.Setting;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.InstallServicesInAssembly(builder.Configuration);
@@ -11,6 +12,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+app.UseMiddleware<SimpleMiddleware>();
 app.UseStaticFiles(new StaticFileOptions{
     FileProvider=new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(),"Assets")),RequestPath="/Assets"
 });
