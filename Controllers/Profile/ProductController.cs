@@ -3,10 +3,10 @@ using shoppingapi2.Dtos.RequestDtos;
 using shoppingapi2.Services;
 using shoppingapi2.Setting;
 
-namespace shoppingapi2.Controllers;
+namespace shoppingapi2.Controllers.Profile;
 
 [ApiController]
-[Route(ApiRoutes.Website.Product)]
+[Route(ApiRoutes.Profile.Product)]
 public class ProductController : ControllerBase
 {
     private readonly IProductService _productService;
@@ -42,4 +42,5 @@ public class ProductController : ControllerBase
 
         return Ok(product);
     }
+
 }

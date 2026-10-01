@@ -1,11 +1,12 @@
 using Microsoft.AspNetCore.Mvc;
 using shoppingapi2.Dtos.RequestDtos;
 using shoppingapi2.Services;
+using shoppingapi2.Setting;
 
-namespace shoppingapi2.Controllers;
+namespace shoppingapi2.Controllers.Admin;
 
 [ApiController]
-[Route("api/[controller]")]
+[Route(ApiRoutes.Admin.User)]
 public class UserController : ControllerBase
 {
     private readonly IUserService _userService;

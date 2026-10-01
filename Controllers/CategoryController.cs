@@ -15,7 +15,7 @@ public class CategoryController : ControllerBase
         _categoryService = catogoryService;
     }
 
-    [HttpGet]
+    [HttpGet("All")]
     public async Task<IActionResult> GetAll()
     {
         var categories = await _categoryService.GetAllAsync();
@@ -30,33 +30,5 @@ public class CategoryController : ControllerBase
             return NotFound();
         return Ok(category);
     }
-
-    [HttpPost]
-    public async Task<IActionResult> Create(CreateCategoryDto dto)
-    {
-        var category = await _categoryService.CreateAsync(dto);
-        if (category == null)
-            return BadRequest();
-        return Ok(category);
-    }
-
-    [HttpPut("{id:int}")]
-    public async Task<IActionResult> Update(int id, UpdateCategoryDto dto)
-    {
-        var result = await _categoryService.UpdateAsync(id, dto);
-        if (!result)
-            return NotFound();
-
-        return NoContent();
-    }
-
-    [HttpDelete("{id:int}")]
-    public async Task<IActionResult> Delete(int id)
-    {
-        var result = await _categoryService.DeleteAsync(id);
-
-        if (!result)
-            return NotFound();
-        return NoContent();
-    }
+   
 }

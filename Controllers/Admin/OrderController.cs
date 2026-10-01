@@ -1,11 +1,12 @@
 using Microsoft.AspNetCore.Mvc;
 using shoppingapi2.Dtos.RequestDtos;
 using shoppingapi2.Services;
+using shoppingapi2.Setting;
 
-namespace shoppingapi2.Controllers;
+namespace shoppingapi2.Controllers.Admin;
 
 [ApiController]
-[Route("api/[controller]")]
+[Route(ApiRoutes.Admin.Order)]
 public class OrderController : ControllerBase
 {
     private readonly IOrderService _orderService;

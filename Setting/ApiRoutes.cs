@@ -11,6 +11,7 @@ public class ApiRoutes
         public const string Product = AdminBase + "/products";
         public const string Order = AdminBase + "/orders";
         public const string User = AdminBase + "/users";
+        public const string Category = AdminBase + "/categories";
 
     }
        public static class Profile

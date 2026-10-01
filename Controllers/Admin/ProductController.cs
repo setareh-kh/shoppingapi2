@@ -3,10 +3,10 @@ using shoppingapi2.Dtos.RequestDtos;
 using shoppingapi2.Services;
 using shoppingapi2.Setting;
 
-namespace shoppingapi2.Controllers;
+namespace shoppingapi2.Controllers.Admin;
 
 [ApiController]
-[Route(ApiRoutes.Website.Product)]
+[Route(ApiRoutes.Admin.Product)]
 public class ProductController : ControllerBase
 {
     private readonly IProductService _productService;
@@ -41,5 +41,38 @@ public class ProductController : ControllerBase
             return NotFound();
 
         return Ok(product);
+    }
+
+    [HttpPost("Add")]
+    public async Task<IActionResult> Create([FromForm] CreateProductDto dto)
+    {
+        var product = await _productService.CreateAsync(dto);
+
+        if (product == null)
+            return BadRequest("Category does not exist.");
+
+        return Ok(product);
+    }
+
+    [HttpPut("{id:int}")]
+    public async Task<IActionResult> Update([FromForm] UpdateProductDto dto, int id)
+    {
+        var result = await _productService.UpdateAsync(id, dto);
+
+        if (!result)
+            return NotFound();
+
+        return NoContent();
+    }
+
+    [HttpDelete("{id:int}")]
+    public async Task<IActionResult> Delete(int id)
+    {
+        var result = await _productService.DeleteAsync(id);
+
+        if (!result)
+            return NotFound();
+
+        return NoContent();
     }
 }
