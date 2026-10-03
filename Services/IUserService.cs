@@ -4,7 +4,7 @@ using shoppingapi2.Models;
 
 namespace shoppingapi2.Services;
 
-public interface IUserService
+public interface IUserService:IBaseService<User>
 {
     Task<PaginateResponseDto<UserResponseDto>> Filter(UserFilterDto filter);
     Task<UserUserResponseDto?> GetByIdAsync(int id);

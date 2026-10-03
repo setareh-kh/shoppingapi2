@@ -7,12 +7,14 @@ using shoppingapi2.Repositories;
 
 namespace shoppingapi2.Services.Service
 {
-   public class UserService : IUserService
+   public class UserService : BaseService<User>,IUserService 
    {
       private readonly IUserRepository _userRepository;
       private readonly IImageService _imageService;
       private readonly IMapper _mapper;
-      public UserService(IUserRepository userRepository, IMapper mapper, IImageService imageService)
+      public UserService(IUserRepository userRepository,
+               IMapper mapper,
+               IImageService imageService):base(userRepository)
       {
          _userRepository = userRepository;
          _imageService = imageService;

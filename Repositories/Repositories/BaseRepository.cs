@@ -6,7 +6,7 @@ using shoppingapi2.Models;
 
 namespace shoppingapi2.Repositories.Repositories;
 
-public class BaseRepository<T> where T : class, ISqlEntity
+public class BaseRepository<T>:IBaseRepository<T> where T : class, ISqlEntity
 {
     protected readonly AppDbContext AppDbContext;
     protected BaseRepository(AppDbContext appDbContext)

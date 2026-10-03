@@ -24,9 +24,8 @@ public class ApiRoutes
       public static class Website
     {
         public const string Product = Base + "/products";
-        public const string Order = Base + "/orders";
-        public const string User = Base + "/users";
         public const string Category= Base + "/categories";
+        public const string Auth = Base + "/auth";
         
     }
     

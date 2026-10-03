@@ -25,5 +25,6 @@ public class ServiceInstaller : IInstaller
         services.AddScoped<IOrderService, OrderService>();
         services.AddScoped<ICategoryService, CategoryService>();
         services.AddScoped<IImageService, ImageService>();
+        services.AddScoped<IAuthService, AuthService>();
     }
 }
