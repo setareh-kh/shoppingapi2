@@ -1,5 +1,3 @@
-using Microsoft.EntityFrameworkCore;
-using shoppingapi2.Models;
 using shoppingapi2.Repositories;
 using shoppingapi2.Repositories.Repositories;
 using shoppingapi2.Services;
@@ -19,6 +17,8 @@ public class ServiceInstaller : IInstaller
         services.AddScoped<IOrderRepository, OrderRepository>();
         services.AddScoped<IOrderDetailsRepository, OrderDetailsRepository>();
         services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));
+        services.AddScoped<ITokenRepository, TokenRepository>();
+
         //install IService and Service as services
         services.AddScoped<IUserService, UserService>();
         services.AddScoped<IProductService, ProductService>();

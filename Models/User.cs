@@ -14,6 +14,7 @@ namespace shoppingapi2.Models
         public required byte Type { get; set; }// 0 is admin and 1 is user
         [Required]
         public required DateTime CreateAt { get; set; }
+        public ICollection<Token> Tokens { get; set; } = new List<Token>();
 
     }
 }

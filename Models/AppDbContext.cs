@@ -14,6 +14,7 @@ namespace shoppingapi2.Models
         public DbSet<Image> Images { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderDetails> OrderDetails { get; set; }
+        public DbSet<Token> Tokens => Set<Token>();
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
