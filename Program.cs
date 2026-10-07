@@ -12,12 +12,12 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-app.UseMiddleware<SimpleMiddleware>();
 app.UseStaticFiles(new StaticFileOptions{
     FileProvider=new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(),"Assets")),RequestPath="/Assets"
 });
+app.UseMiddleware<SimpleMiddleware>();
+app.UseMiddleware<JwtMiddleware>();
 app.UseHttpsRedirection();
-
 app.UseAuthorization();
 
 app.MapControllers();

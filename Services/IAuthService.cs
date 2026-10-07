@@ -5,5 +5,5 @@ namespace shoppingapi2.Services;
 
 public interface IAuthService
 {
-   Task<UserResponseDto?> LoginAsync(LoginRequestDto dto);
+   Task<StandardResponseDto> LoginAsync(LoginRequestDto dto);
 }

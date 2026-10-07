@@ -1,3 +1,4 @@
+using shoppingapi2.Dtos.Objects;
 using shoppingapi2.Repositories;
 using shoppingapi2.Repositories.Repositories;
 using shoppingapi2.Services;
@@ -26,5 +27,8 @@ public class ServiceInstaller : IInstaller
         services.AddScoped<ICategoryService, CategoryService>();
         services.AddScoped<IImageService, ImageService>();
         services.AddScoped<IAuthService, AuthService>();
+        var appSettings = configuration.GetSection("AppSettings").Get<AppSettings>();
+        services.AddSingleton(appSettings!);
+        services.AddHttpContextAccessor();
     }
 }

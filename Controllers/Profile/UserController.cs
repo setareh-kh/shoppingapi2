@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using shoppingapi2.Dtos.RequestDtos;
 using shoppingapi2.Services;
 using shoppingapi2.Setting;
+using shoppingapi2.Validators;
 
 namespace shoppingapi2.Controllers;
 
@@ -26,7 +27,7 @@ public class UserController : ControllerBase
 
         return Ok(user);
     }
-
+    //[Authorize]
     [HttpGet("mobile/{mobile}")]
     public async Task<IActionResult> GetByMobile(string mobile)
     {

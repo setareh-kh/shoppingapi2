@@ -2,9 +2,10 @@ using Microsoft.AspNetCore.Mvc;
 using shoppingapi2.Dtos.RequestDtos;
 using shoppingapi2.Services;
 using shoppingapi2.Setting;
+using shoppingapi2.Validators;
 
 namespace shoppingapi2.Controllers.Admin;
-
+[Authorize]
 [ApiController]
 [Route(ApiRoutes.Admin.User)]
 public class UserController : ControllerBase
