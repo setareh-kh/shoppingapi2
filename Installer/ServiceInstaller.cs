@@ -30,5 +30,9 @@ public class ServiceInstaller : IInstaller
         var appSettings = configuration.GetSection("AppSettings").Get<AppSettings>();
         services.AddSingleton(appSettings!);
         services.AddHttpContextAccessor();
+
+        var redisConnectionString= configuration.GetValue<string>("RedisConnectionStrings:Redis");
+        var perfixCach= configuration.GetValue<string>("RedisConnectionStrings:RedisPrefix");
+        services.AddSingleton<IRedisService>(_ =>new RedisService(redisConnectionString!,perfixCach!));
     }
 }
