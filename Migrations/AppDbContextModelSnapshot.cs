@@ -220,6 +220,9 @@ namespace shoppingapi2.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
+                    b.Property<bool?>("Active")
+                        .HasColumnType("tinyint(1)");
+
                     b.Property<DateTime>("CreateAt")
                         .HasColumnType("datetime(6)");
 

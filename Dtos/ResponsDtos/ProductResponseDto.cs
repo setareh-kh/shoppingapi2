@@ -1,6 +1,6 @@
-using System.ComponentModel.DataAnnotations;
+using shoppingapi2.Models;
 
-namespace shoppingapi2.Models
+namespace shoppingapi2.Dtos.ResponseDtos
 {
     public class ProductResponseDto
     {

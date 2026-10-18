@@ -22,7 +22,4 @@ public class AuthController : ControllerBase
             return Unauthorized();
         return Ok(result);
     }
-
-    
-   
 }

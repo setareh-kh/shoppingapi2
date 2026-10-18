@@ -2,6 +2,8 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Text;
 using Microsoft.IdentityModel.Tokens;
 using shoppingapi2.Dtos.Objects;
+using shoppingapi2.Models;
+using shoppingapi2.Services;
 
 namespace shoppingapi2.Setting;
 
@@ -9,13 +11,13 @@ public class JwtMiddleware
 {
     private readonly RequestDelegate _next;
     private readonly AppSettings _appSettings;
-
     public JwtMiddleware(RequestDelegate next, AppSettings appSettings)
     {
         _next = next;
         _appSettings = appSettings;
     }
-    public async Task InvokeAsync(HttpContext context)
+    public async Task InvokeAsync(HttpContext context, IRedisService redisService,
+        IUserService userService)
     {
 
         var token = context.Request.Headers.Authorization
@@ -40,9 +42,21 @@ public class JwtMiddleware
             out SecurityToken validatedToken);
         var jwtToken = (JwtSecurityToken)validatedToken;
         var userId = int.Parse(jwtToken.Claims.First(x => x.Type == "id").Value);
+        var user = await redisService.GetValueAsync<User>($"user_id_{userId}");
+        if (user == null)
+        {
+            user = await userService.GetAsync(userId);
+            if (user != null)
+            {
+                await redisService.SetValueAsync($"user_id_{userId}", user, TimeSpan.FromMinutes(5));
+            }
+        }
+        if(user != null)
+        {
+            context.Items["user"] = user;
+            context.Items["token"] = token;
+        }
 
-        context.Items["user"] = userId;
-        context.Items["token"] = token;
 
         await _next(context);
 
