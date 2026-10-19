@@ -94,7 +94,7 @@ public class AuthService : IAuthService
         await _tokenRepository.SaveChangesAsync();
 
         return jwt;
-    }
+    }   
 
 
 }

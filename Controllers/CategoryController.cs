@@ -4,6 +4,7 @@ using shoppingapi2.Dtos.ResponseDtos;
 using shoppingapi2.Services;
 using shoppingapi2.Setting;
 
+namespace shoppingapi2.Controllers;
 
 [ApiController]
 [Route(ApiRoutes.Website.Category)]

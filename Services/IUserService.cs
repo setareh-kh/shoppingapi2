@@ -13,4 +13,5 @@ public interface IUserService:IBaseService<User>
     Task<UserUserResponseDto?> CreateAsync(CreateUserDto dto);
     Task<bool> UpdateAsync(int id, UpdateUserDto dto);
     Task<bool> DeleteAsync(int id);
+    Task<User> RegisterAsync(CreateUserDto createUserDto);
 }

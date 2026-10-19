@@ -18,14 +18,15 @@ public class ApiRoutes
     {
         public const string Product = ProfileBase + "/products";
         public const string Order = ProfileBase + "/orders";
-        public const string User = ProfileBase + "/users";
         
     }
       public static class Website
     {
         public const string Product = Base + "/products";
         public const string Category= Base + "/categories";
+        public const string User = Base + "/users";
         public const string Auth = Base + "/auth";
+
         
     }
     

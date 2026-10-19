@@ -52,6 +52,14 @@
               "target": "Package",
               "version": "[6.5.2, )"
             },
+            "Hangfire": {
+              "target": "Package",
+              "version": "[1.8.25, )"
+            },
+            "Hangfire.Redis.StackExchange": {
+              "target": "Package",
+              "version": "[1.12.0, )"
+            },
             "JsonPatch": {
               "target": "Package",
               "version": "[2.0.7, )"

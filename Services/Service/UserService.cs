@@ -1,4 +1,5 @@
 using AutoMapper;
+using Hangfire;
 using shoppingapi2.Dtos.RequestDtos;
 using shoppingapi2.Dtos.ResponseDtos;
 using shoppingapi2.Models;
@@ -7,14 +8,14 @@ using shoppingapi2.Repositories;
 
 namespace shoppingapi2.Services.Service
 {
-   public class UserService : BaseService<User>,IUserService 
+   public class UserService : BaseService<User>, IUserService
    {
       private readonly IUserRepository _userRepository;
       private readonly IImageService _imageService;
       private readonly IMapper _mapper;
       public UserService(IUserRepository userRepository,
                IMapper mapper,
-               IImageService imageService):base(userRepository)
+               IImageService imageService) : base(userRepository)
       {
          _userRepository = userRepository;
          _imageService = imageService;
@@ -113,6 +114,29 @@ namespace shoppingapi2.Services.Service
          await _imageService.DeleteAsync("User", user.Id);
          return true;
       }
+      public async Task<User> RegisterAsync(CreateUserDto createUserDto)
+      {
+         var existingUser = await _userRepository.FindAsync(x => x.Mobile == createUserDto.Mobile);
+
+         if (existingUser != null)
+            throw new Exception("Email already exists.");
+         var newUser = new User
+         {
+            Name = createUserDto.Name,
+            Mobile = createUserDto.Mobile,
+            Password = createUserDto.Password,
+            Type = 0,
+            CreateAt = DateTime.UtcNow
+
+         };
+         await _userRepository.InsertAsync(newUser);
+         BackgroundJob.Enqueue("critical", () =>Console.WriteLine("This is a fire-and-forget job!"));
+         BackgroundJob.Schedule("critical",() => Console.WriteLine("Email reminder sent!"),TimeSpan.FromHours(1));
+         
+         return newUser;
+         
+      }
+
    }
 
 }

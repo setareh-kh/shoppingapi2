@@ -3,6 +3,7 @@ using shoppingapi2.Dtos.RequestDtos;
 using shoppingapi2.Services;
 using shoppingapi2.Setting;
 
+namespace shoppingapi2.Controllers;
 
 [ApiController]
 [Route(ApiRoutes.Website.Auth)]
@@ -13,6 +14,7 @@ public class AuthController : ControllerBase
     public AuthController(IAuthService authService)
     {
         _authService = authService;
+
     }
     [HttpPost("login")]
     public async Task<IActionResult> Login(LoginRequestDto loginDto)
@@ -22,4 +24,5 @@ public class AuthController : ControllerBase
             return Unauthorized();
         return Ok(result);
     }
+
 }

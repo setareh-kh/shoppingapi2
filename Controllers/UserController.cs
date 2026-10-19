@@ -2,12 +2,11 @@ using Microsoft.AspNetCore.Mvc;
 using shoppingapi2.Dtos.RequestDtos;
 using shoppingapi2.Services;
 using shoppingapi2.Setting;
-using shoppingapi2.Validators;
 
 namespace shoppingapi2.Controllers;
 
 [ApiController]
-[Route(ApiRoutes.Profile.User)]
+[Route(ApiRoutes.Website.User)]
 public class UserController : ControllerBase
 {
     private readonly IUserService _userService;
@@ -71,4 +70,14 @@ public class UserController : ControllerBase
 
         return NoContent();
     }
+    [HttpPost("Register")]
+    public async Task<IActionResult> Register( [FromForm]CreateUserDto dto)
+    {
+        var result = await _userService.RegisterAsync(dto);
+        if (result == null)
+            return Conflict("A user with this mobile already exists.");
+
+        return Ok(result);
+    }
+    
 }

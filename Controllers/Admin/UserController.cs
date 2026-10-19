@@ -5,6 +5,7 @@ using shoppingapi2.Setting;
 using shoppingapi2.Validators;
 
 namespace shoppingapi2.Controllers.Admin;
+
 [Authorize(Type = new int[] { 0 })]
 [ApiController]
 [Route(ApiRoutes.Admin.User)]
@@ -16,6 +17,7 @@ public class UserController : ControllerBase
     {
         _userService = userService;
     }
+
     [HttpGet("Filter")]
     public async Task<IActionResult> Filter([FromQuery] UserFilterDto filter)
     {
@@ -85,4 +87,5 @@ public class UserController : ControllerBase
 
         return NoContent();
     }
+    
 }
