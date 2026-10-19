@@ -21,7 +21,7 @@ public class CategoryController : ControllerBase
     public async Task<IActionResult> GetAll()
     {
         var result = await _redisService.GetValueAsync<List<CategoryResponseDto>>($"All_categories");
-        if (result!.Count==0 ) return Ok(result);
+        if (result != null) return Ok(result);
         result = await _categoryService.GetAllAsync();
         await _redisService.SetValueAsync($"All_categories", result, TimeSpan.FromMinutes(10));
         return Ok(result);

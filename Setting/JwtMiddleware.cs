@@ -19,7 +19,6 @@ public class JwtMiddleware
     public async Task InvokeAsync(HttpContext context, IRedisService redisService,
         IUserService userService)
     {
-
         var token = context.Request.Headers.Authorization
                        .FirstOrDefault()?
                        .Split(" ")[^1]
@@ -27,6 +26,7 @@ public class JwtMiddleware
         if (string.IsNullOrWhiteSpace(token))
         {
             await _next(context);
+            return;
         }
         var tokenHandler = new JwtSecurityTokenHandler();
         var key = Encoding.ASCII.GetBytes(_appSettings.Secret!);
