@@ -30,7 +30,7 @@ public class CategoryController : ControllerBase
     [HttpGet("{id:int}")]
     public async Task<IActionResult> GetById(int id)
     {
-        var result = await _redisService.GetValueAsync<CategoryResponseDto>($"Product_{id}");
+        var result = await _redisService.GetValueAsync<CategoryResponseDto>($"Category_{id}");
         if (result != null) return Ok(result);
         result = await _categoryService.GetByIdAsync(id);
         if (result == null)
