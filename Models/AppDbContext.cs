@@ -23,6 +23,13 @@ namespace shoppingapi2.Models
             e.HasKey(x => x.Id);
             e.Property(x => x.Id).ValueGeneratedOnAdd();
         });
+            modelBuilder.Entity<Category>().ToTable("categories");
+            modelBuilder.Entity<Product>().ToTable("products");
+            modelBuilder.Entity<Image>().ToTable("images");
+            modelBuilder.Entity<Order>().ToTable("orders");
+            modelBuilder.Entity<OrderDetails>().ToTable("orderdetails");
+            modelBuilder.Entity<User>().ToTable("users");
+            modelBuilder.Entity<Token>().ToTable("tokens");
 
         }
     }
